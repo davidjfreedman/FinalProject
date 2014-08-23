@@ -2,6 +2,7 @@
 
 <head>
     <title>Affluentsy - Only the finest handmade luxury products</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/typeplate.css">
     <link rel="stylesheet" type="text/css" href="./css/normalize.css">
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
@@ -29,25 +30,30 @@
             <div class="topLinks">About Us | Contact</div>
             <div class="searchBar">
                 <form class="searchBox">
-                    <input type="search">
-                    <input type="submit">
+                    <input type="search" class="sBox">
+                    <button type="submit" class="sButton">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </form>
             </div>
         </div>
     </div>
     <div class="contentWrapper">
         <div class="sideBar">
-            <ul>Categories
-                <li>Men</li>
-                <li>Women</li>
-                <li>Children</li>
-                <li>Artwork</li>
-                <li>Furnishings</li>
-            </ul>
+            <div class="priceButton">Show Prices</div>
+            <div class="categories">
+                <ul id="Categories">Categories
+                    <li>Men</li>
+                    <li>Women</li>
+                    <li>Children</li>
+                    <li>Artwork</li>
+                    <li>Jewelry</li>
+                </ul>
+            </div>
         </div>
-        <div class="listingsDestination">
-            <div class="listingsNav">
-                <div class="results">Viewing 25 results out of 10,972</div>
+        <div class="contentBlock">
+            <div class="listingsNav none">
+                <div class="results"></div>
                 <div class="sortingSection">
                     <form action="">
                         <select name="sorting">
@@ -60,128 +66,72 @@
                     </form>
                 </div>
             </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
-            </div>
-            <div class="fakeListing">
-                <div class="listingsInfoInside">
-                    <h5>BaneCat</h5>
-                    <h6>Lorem Ipsum</h6>
-                </div>
-            </div>
-            <div class="listingInfoOutside">
-                <h5>BaneCat</h5>
-                <h6>Lorem Ipsum</h6>
+            <div class="listingsDestination">
             </div>
         </div>
     </div>
+    <div class="listingBox" id="hoverListing">
+        <div class="mask"></div>
+        <div class="hoverListing">
+            <div class="imageBox">
+                <div class="arrowLeft"><i class="fa fa-chevron-left"></i>
+                </div>
+                <div class="arrowRight"><i class="fa fa-chevron-right"></i>
+                </div>
+                <!--position absolute at sides of image -->
+                <div class="imageDiv">
+                    <img src="http://placekitten.com/g/800/600">
+                </div>
+                <!--overall image div, width:100 if large,
+                width:half if small -->
+                <div class="listingTitle">
+                    <h4>Insert Epic Title Here</h4>
+                    <h6>
+                        <em>Only $250,000</em>
+                    </h6>
+                    <hr>
+                </div>
+                <div class="sellerBox" id="leftBox">
+                    <img src="./images/seller.jpg">
+                    <b>Insert Seller Name</b>
+                    <br>
+                    <b>Henderson, MO.</b>
+                </div>
+                <!-- if the screen is large, this will be below the image -->
+            </div>
+            <div class="infoContent">
+                <div class="descriptionBox">
+                    <em>Description:</em>
+                    <p>I made this for my mom. Her little 17 year old Jack Russell passed away on Dec 16 2013.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <!--this will show regardless -->
+                <div class="etsyLink">
+                    <div class="uniqueness">Only 1 Left!</div>
+                    <div class="socialLinks">
+                        <a href="http://www.facebook.com">
+                            <img src="http://www.tamusa.tamus.edu/uploadfile/folders/felopez5400/Image/Image-635399091568723656-10.100.150.124.jpg">
+                        </a>
+                        <a href="http://www.twitter.com">
+                            <img src="http://maisonmouse.files.wordpress.com/2013/02/twitter-logo.jpg">
+                        </a>
+                        <a href="http://www.pinterest.com">
+                            <img src="http://napiboldogsag.com/wp-content/uploads/1390599458_pinterest_icon.png">
+                        </a>
+                    </div>
+                    <a href="http://www.etsy.com">
+                        <div class="etsyButton">
+                            View this item on <b>Etsy</b>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./js/lodash.js"></script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/parse-1.2.19.min.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
 </body>
 
 </html>

@@ -4,6 +4,11 @@
 }
 body > * {
     position: relative;
+    min-width: 450px;
+    min-height: 800px;
+}
+.noScroll {
+    overflow: hidden;
 }
 /* ---------------------------- */
 
@@ -28,6 +33,7 @@ body > * {
     background-size: cover;
     background-attachment: fixed;
     position: fixed;
+    background-position: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -44,6 +50,12 @@ body > * {
     left: 50%;
     width: 100%;
 }
+.centerArea h1, .centerArea h4 {
+    color: white;
+}
+.searchBox {
+    color: black;
+}
 /* ---------------------------- */
 
 /*                              */
@@ -57,22 +69,25 @@ body > * {
 .mainHeader {
     display: block;
     width: 100%;
-    display: block;
     margin: 0 auto;
-    background-color: blue;
+    background-color: gray;
     min-height: 100px;
+}
+.mainHeader.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
 .title {
     display: inline-block;
     width: 35%;
     font-size: 1.2em;
     vertical-align: middle;
-    /*    padding-left: 15px;
-*/
 }
 .menuDrop {
     display: inline-block;
-    width: 35%;
+    width: 24%;
     text-align: center;
 }
 .navBar {
@@ -83,19 +98,24 @@ body > * {
 }
 .rightSection {
     display: inline-block;
-    width: 27%;
+    width: 38%;
     overflow: hidden;
 }
 .topLinks {
     display: block;
     vertical-align: middle;
     text-align: right;
-    /*padding: 10px 10px 0 0;*/
 }
 .searchBar {
     vertical-align: middle;
     display: block;
     text-align: right;
+}
+.sBox {
+    width: 71%;
+}
+.sButton {
+    width: 18%;
 }
 /* ---------------------------- */
 
@@ -123,11 +143,36 @@ body > * {
 
 .sideBar {
     display: none;
-    background-color: purple;
-    width: 18%;
+    background-color: darkgray;
+    width: 19%;
     height: 100vh;
     vertical-align: top;
     margin-top: 0;
+}
+.sideBar.active {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    z-index: 1;
+}
+.priceButton {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+    background-color: purple;
+}
+.categories {
+    display: block;
+    width: 100%;
+}
+#Categories {
+    padding: 1em;
+}
+#Categories li {
+    list-style-type: none;
+    padding-left: 1em;
+    font-size: 0.9em;
 }
 /* ---------------------------- */
 
@@ -139,11 +184,20 @@ body > * {
 
 /* ---------------------------- */
 
-.listingsDestination {
+.sortingSection {
+    vertical-align: top;
+    padding-top: 0.5em;
+}
+.contentBlock {
     display: inline-block;
     min-height: 100vh;
-    width: 80%;
-    margin-top: 0;
+    width: 100%;
+    margin: 0 auto;
+}
+.contentBlock.active {
+    padding-left: 19.5%;
+    padding-top: 100px;
+    width: 100%;
 }
 .listingsNav {
     display: block;
@@ -158,14 +212,25 @@ body > * {
     width: 48%;
     text-align: right;
 }
-.fakeListing {
+.listingsDestination {
+    padding-left: 0.4em;
+    display: inline-block;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+}
+.listingsDestination a {
+    text-decoration: none;
+}
+.Listing {
     display: inline-block;
     width: 50%;
     height: 200px;
     margin: 0;
     margin-bottom: 1em;
-    background-image: url(http://placekitten.com/g/150/150);
+    border-radius: 10px;
     background-size: cover;
+    background-position: center;
     vertical-align: top;
     position: relative;
     padding-top: 5px;
@@ -174,13 +239,163 @@ body > * {
     display: none;
     position: absolute;
     bottom: 0;
+    padding: 3%;
 }
 .listingInfoInside h5, .listingInfoInside h6 {
     margin-bottom: 0;
 }
 .listingInfoOutside {
     display: inline-block;
-    width: 50%;
+    width: 38%;
+}
+/* ---------------------------- */
+
+/*                              */
+
+/*        Hover Item Box        */
+
+/*                              */
+
+/* ---------------------------- */
+
+.listingBox {
+    display: none;
+}
+.mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.7;
+    z-index: 3;
+}
+.hoverListing {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    min-width: 315px;
+    height: 95vh;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 5px solid white;
+    background-image: url('../images/leather_black.jpg');
+    background: cover center;
+    color: white;
+    z-index: 4;
+}
+.imageBox {
+    display: block;
+    position: relative;
+    min-height: 40%;
+    width: 100%;
+    overflow: hidden;
+}
+.imageDiv {
+    display: block;
+    background-color: blue;
+    width: 100%;
+    height: 30vh;
+    overflow: hidden;
+}
+.imageDiv img {
+    width: 100%;
+    min-height: 100%;
+}
+.arrowLeft {
+    position: absolute;
+    top: 12%;
+    left: 0;
+    transform: translateY(-12%);
+    width: 3%;
+    min-height: 5%;
+    z-index: 4;
+    padding: 14px 13px;
+    text-align: center;
+    background-color: gray;
+    opacity: 0.6;
+}
+.arrowRight {
+    position: absolute;
+    top: 12%;
+    right: 4;
+    transform: translateY(-12%);
+    width: 3%;
+    min-height: 5%;
+    z-index: 4;
+}
+.listingTitle {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+.sellerBox {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: 7vh;
+    padding-left: 10vw;
+    line-height: 1;
+}
+.sellerBox img {
+    position: absolute;
+    left: 2%;
+    width: 7vw;
+    border-radius: 50%;
+}
+.listingTitle h4, .listingTitle h6 {
+    line-height: 1;
+    margin-bottom: 5;
+}
+.infoContent {
+    display: block;
+    height: 32vh;
+    width: 100%;
+}
+.descriptionBox {
+    display: block;
+    width: 100%;
+    height: 30vh;
+    line-height: 1.1;
+/*    background-color: black;
+*/    padding: 10px 15px;
+    text-align: justify;
+    overflow-y: scroll;
+}
+.uniqueness {
+    display: inline-block;
+}
+.etsyLink {
+    display: inline-block;
+    padding: 1em 1em;
+    text-align: center;
+
+}
+.socialLinks a, .etsyLink a {
+    text-decoration: none;
+}
+.socialLinks {
+    display: inline-block;
+}
+a img {
+    width: 20px;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.etsyButton {
+    display: inline-block;
+    text-align: center;
+    border-radius: 7px;
+    padding: 0.25em 0.5em;
+    background-color: RGB(227, 72, 0);
+    color: white;
+    vertical-align: middle;
+    font-family: serif;
 }
 /* ---------------------------- */
 
@@ -188,27 +403,49 @@ body > * {
 
 /*         Media Queries        */
 
+/*         Main Content         */
+
 /*                              */
 
 /* ---------------------------- */
 
-@media (min-width: 600px) and (max-width: 700px) {
-    .fakeListing {
-        width: 40%;
+@media (min-width: 0px) and (max-width: 600px) {
+    .contentBlock.active {
+        padding-left: 0;
     }
 }
-
+@media (min-width: 600px) and (max-width: 700px) {
+    .navBar {
+        font-size: 1em;
+    }
+    .rightSection {
+        width: 30%;
+        text-align: right;
+    }
+    .Listing {
+        width: 49%;
+    }
+    #Categories {
+        font-size: 0.9em;
+    }
+    #Categories li {
+        font-size: 0.8em;
+        padding-left: 2em;
+    }
+}
 @media (min-width: 501px) and (max-width: 850px) {
     .listingsDestination {
         width: 100%;
     }
     .listingInfoInside {
-        display: auto;
+        display: inline-block;
     }
     .listingInfoOutside {
         display: none;
     }
-
+    .Listing {
+        width: 49%;
+    }
 }
 @media (min-width: 600px) {
     .title {
@@ -220,31 +457,92 @@ body > * {
     }
     .navBar {
         display: inline-block;
-        width: 40%;
+        width: 38%;
+    }
+    .rightSection {
+        width: 30%;
     }
     .listingsDestination {
-        width: 80%;
+        padding: 0.5em;
     }
     .sideBar {
         display: inline-block;
     }
+    .contentBlock {
+        width: 80%;
+    }
 }
 @media (min-width: 700px) and (max-width: 850px) {
-    .fakeListing {
-        width: 30%;
+    .Listing {
+        width: 32%;
     }
 }
 @media (min-width: 850px) {
-    .fakeListing {
-        width: 23%;
+    .Listing {
+        width: 24%;
         border: 1em;
         border-color: transparent;
         height: 200px;
     }
+    .listingsDestination {
+        width: 100%;
+    }
     .listingInfoInside {
-        display: auto;
+        display: inline-block;
     }
     .listingInfoOutside {
         display: none;
+    }
+    .sideBar {
+        width: 15%;
+    }
+    .contentBlock.active {
+        padding-left: 15.5%;
+        width: 100%;
+    }
+}
+@media (min-width: 970px) {
+    .sideBar {
+        width: 13%;
+    }
+    .contentBlock.active {
+        padding-left: 13.5%
+    }
+}
+/* ---------------------------- */
+
+/*                              */
+
+/*         Media Queries        */
+
+/*         Hover Listing        */
+
+/*                              */
+
+/* ---------------------------- */
+
+@media (min-width: 600px) {
+    .hoverListing {
+        width: 85%;
+    }
+    .imageBox {
+        display: inline-block;
+        width: 55%;
+    }
+    .infoContent {
+        display: inline-block;
+        width: 44%;
+    }
+    .descriptionBox {
+        min-height: 60vh;
+    }
+    .imageDiv {
+        height: 50vh;
+    }
+    .etsyButton {
+        display: block;
+    }
+    .listingTitle {
+        padding: 1em;
     }
 }
