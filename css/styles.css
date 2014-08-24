@@ -3,6 +3,8 @@
     -webkit-box-sizing: border-box;
 }
 body > * {
+    font-family: serif;
+    letter-spacing: 2px;
     position: relative;
     min-width: 450px;
     min-height: 800px;
@@ -28,9 +30,7 @@ body > * {
     color: white;
     display: block;
     min-height: 100vh;
-    background-color: blue;
-    background: url('../images/leather.jpg');
-    background-size: cover;
+    background-color: salmon;
     background-attachment: fixed;
     position: fixed;
     background-position: center;
@@ -246,156 +246,12 @@ body > * {
 }
 .listingInfoOutside {
     display: inline-block;
+    padding-left: 0.4em;
     width: 38%;
 }
-/* ---------------------------- */
-
-/*                              */
-
-/*        Hover Item Box        */
-
-/*                              */
-
-/* ---------------------------- */
-
-.listingBox {
-    display: none;
-}
-.mask {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.7;
-    z-index: 3;
-}
-.hoverListing {
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    min-width: 315px;
-    height: 95vh;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 5px solid white;
-    background-image: url('../images/leather_black.jpg');
-    background: cover center;
-    color: white;
-    z-index: 4;
-}
-.imageBox {
-    display: block;
-    position: relative;
-    min-height: 40%;
-    width: 100%;
-    overflow: hidden;
-}
-.imageDiv {
-    display: block;
-    background-color: blue;
-    width: 100%;
-    height: 30vh;
-    overflow: hidden;
-}
-.imageDiv img {
-    width: 100%;
-    min-height: 100%;
-}
-.arrowLeft {
-    position: absolute;
-    top: 12%;
-    left: 0;
-    transform: translateY(-12%);
-    width: 3%;
-    min-height: 5%;
-    z-index: 4;
-    padding: 14px 13px;
-    text-align: center;
-    background-color: gray;
-    opacity: 0.6;
-}
-.arrowRight {
-    position: absolute;
-    top: 12%;
-    right: 4;
-    transform: translateY(-12%);
-    width: 3%;
-    min-height: 5%;
-    z-index: 4;
-}
-.listingTitle {
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-.sellerBox {
-    display: block;
-    position: relative;
-    width: 100%;
-    min-height: 7vh;
-    padding-left: 10vw;
-    line-height: 1;
-}
-.sellerBox img {
-    position: absolute;
-    left: 2%;
-    width: 7vw;
-    border-radius: 50%;
-}
-.listingTitle h4, .listingTitle h6 {
-    line-height: 1;
-    margin-bottom: 5;
-}
-.infoContent {
-    display: block;
-    height: 32vh;
-    width: 100%;
-}
-.descriptionBox {
-    display: block;
-    width: 100%;
-    height: 30vh;
-    line-height: 1.1;
-/*    background-color: black;
-*/    padding: 10px 15px;
-    text-align: justify;
-    overflow-y: scroll;
-}
-.uniqueness {
-    display: inline-block;
-}
-.etsyLink {
-    display: inline-block;
-    padding: 1em 1em;
-    text-align: center;
-
-}
-.socialLinks a, .etsyLink a {
-    text-decoration: none;
-}
-.socialLinks {
-    display: inline-block;
-}
-a img {
-    width: 20px;
-    vertical-align: middle;
-    border-radius: 2px;
-}
-.etsyButton {
-    display: inline-block;
-    text-align: center;
-    border-radius: 7px;
-    padding: 0.25em 0.5em;
-    background-color: RGB(227, 72, 0);
-    color: white;
-    vertical-align: middle;
-    font-family: serif;
+.listingInfoOutside h6 {
+    color: rgb(88, 82, 82);
+    text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
 }
 /* ---------------------------- */
 
@@ -513,6 +369,218 @@ a img {
 
 /*                              */
 
+/*        Hover Item Box        */
+
+/*                              */
+
+/* ---------------------------- */
+
+.listingBox {
+    display: none;
+}
+.mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.86;
+    z-index: 3;
+}
+.hoverListing {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -51%);
+    width: 70%;
+    min-width: 315px;
+    height: 95vh;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid rgb(212, 175, 55);
+    background-color: rgb(41, 35, 26);
+    color: white;
+    z-index: 4;
+    padding: 0.5em;
+}
+/* ---------------------------- */
+
+/*        Left Side Hover       */
+
+/* ---------------------------- */
+
+.leftSide {
+    display: block;
+}
+.imageBox {
+    display: block;
+    position: relative;
+    min-height: 40%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid silver;
+    background-color: rgba(70, 70, 70, 0.7);
+    margin-bottom: 0.5em;
+}
+.shadowDiv {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #000000;
+}
+.imageDiv {
+    display: block;
+    background-color: blue;
+    width: 100%;
+    height: 30vh;
+    overflow: hidden;
+}
+.imageDiv img {
+    width: 100%;
+    min-height: 100%;
+}
+.arrowLeft {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    transform: translateY(-30%);
+    width: 3%;
+    min-height: 5%;
+    z-index: 4;
+    padding: 14px 13px;
+    text-align: center;
+    background-color: gray;
+    opacity: 0.6;
+}
+.arrowRight {
+    position: absolute;
+    top: 30%;
+    right: 0;
+    transform: translateY(-30%);
+    width: 3%;
+    min-height: 5%;
+    z-index: 4;
+    padding: 14px 13px;
+    text-align: center;
+    background-color: gray;
+    opacity: 0.6;
+}
+.listingTitle {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.35em 0;
+}
+.listingTitle * {
+    color: white;
+}
+.sellerBox {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: 7vh;
+    padding-left: 10vw;
+    line-height: 1;
+    text-indent: 1px;
+    transform: scale(0.86);
+}
+.sellerBox img {
+    position: absolute;
+    left: 2%;
+    width: 7vw;
+    min-width: 45px;
+    border-radius: 50%;
+    margin-bottom: 0.5em;
+    padding: 2% 0;
+}
+.sellerText {
+    padding-left: 15px;
+}
+.sellerText p {
+    line-height: 1;
+    text-indent: 0.05;
+    margin-bottom: 0.5em;
+}
+p span {
+    color: yellow;
+    margin-right: -5px;
+}
+.listingTitle h4, .listingTitle h6 {
+    line-height: 1;
+    margin-bottom: 5;
+}
+/* ---------------------------- */
+
+/*       Right Side Hover       */
+
+/* ---------------------------- */
+
+.infoContent {
+    display: block;
+    height: 32vh;
+    width: 100%;
+}
+.descriptionBox {
+    display: block;
+    width: 97%;
+    height: 25vh;
+    line-height: 1.1;
+    padding: 10px 15px;
+    text-align: justify;
+    overflow-y: scroll;
+    border-radius: 10px;
+    margin: 0 0.25em;
+    background-color: RGB(185, 170, 151);
+    color: auto;
+    border-radius: 10px;
+    border: 1px solid silver;
+    letter-spacing: 0.4px;
+}
+.uniqueness {
+    display: inline-block;
+}
+.etsyLink {
+    display: inline-block;
+    padding: 1em 1em;
+    text-align: center;
+}
+.socialLinks a, .etsyLink a {
+    text-decoration: none;
+}
+.socialLinks {
+    display: inline-block;
+}
+a img {
+    width: 20px;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+.etsyButton {
+    display: inline-block;
+    text-align: center;
+    border-radius: 7px;
+    padding: 0.25em 0.5em;
+    background-color: RGB(227, 72, 0);
+    color: white;
+    vertical-align: middle;
+    font-family: serif;
+}
+.closeButton {
+    display: block;
+    position: absolute;
+    border-radius: 50px;
+    width: 10px;
+}
+/* ---------------------------- */
+
+/*                              */
+
 /*         Media Queries        */
 
 /*         Hover Listing        */
@@ -524,6 +592,11 @@ a img {
 @media (min-width: 600px) {
     .hoverListing {
         width: 85%;
+    }
+    .leftSide {
+        display: inline-block;
+        width: 55%;
+        border-radius: 10px;
     }
     .imageBox {
         display: inline-block;

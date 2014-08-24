@@ -79,7 +79,11 @@ function app() {
             var search_results = listings[0].results;
             search_results.forEach(
                 function(oneListing) {
-                    oneListing.short_title = (oneListing.title.substring(0, 25)) + '...';
+                    if (oneListing.title.length >= 35) {
+                        oneListing.short_title = (oneListing.title.substring(0, 35)) + '...';
+                    } else if (oneListing.title.length < 35) {
+                      oneListing.short_title = oneListing.title;
+                    }
                     var filledHTML = template(oneListing);
                     all_Listings += filledHTML;
                 });

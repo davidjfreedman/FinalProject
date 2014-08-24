@@ -73,29 +73,36 @@
     <div class="listingBox" id="hoverListing">
         <div class="mask"></div>
         <div class="hoverListing">
-            <div class="imageBox">
-                <div class="arrowLeft"><i class="fa fa-chevron-left"></i>
-                </div>
-                <div class="arrowRight"><i class="fa fa-chevron-right"></i>
-                </div>
-                <!--position absolute at sides of image -->
-                <div class="imageDiv">
-                    <img src="http://placekitten.com/g/800/600">
-                </div>
-                <!--overall image div, width:100 if large,
+            <div class="leftSide">
+                <div class="imageBox">
+                    <div class="shadowDiv"></div>
+                    <div class="arrowLeft"><i class="fa fa-chevron-left"></i>
+                    </div>
+                    <div class="arrowRight"><i class="fa fa-chevron-right"></i>
+                    </div>
+                    <!--position absolute at sides of image -->
+                    <div class="imageDiv">
+                        <img src="http://placekitten.com/g/800/600">
+                    </div>
+                    <!--overall image div, width:100 if large,
                 width:half if small -->
-                <div class="listingTitle">
-                    <h4>Insert Epic Title Here</h4>
-                    <h6>
-                        <em>Only $250,000</em>
-                    </h6>
-                    <hr>
+                    <div class="listingTitle">
+                        <h4>Insert Epic Title Here</h4>
+                        <h6>
+                            <em>Only $250,000.00</em>
+                        </h6>
+                    </div>
                 </div>
                 <div class="sellerBox" id="leftBox">
                     <img src="./images/seller.jpg">
-                    <b>Insert Seller Name</b>
-                    <br>
-                    <b>Henderson, MO.</b>
+                    <div class="sellerText">
+                        <b>Insert Seller Name</b>
+                        <br>
+                        <p>Henderson, MO.
+                            <br>Rating:
+                            <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                            </span><i class="fa fa-star"></i><i class="fa fa-star"></i> (6)</p>
+                    </div>
                 </div>
                 <!-- if the screen is large, this will be below the image -->
             </div>
@@ -125,6 +132,10 @@
                         </div>
                     </a>
                 </div>
+            </div>
+        </div>
+        <div class="overHover">
+            <div class="closeButton"><i class="fa fa-times"></i>
             </div>
         </div>
     </div>
