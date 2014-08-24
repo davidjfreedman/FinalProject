@@ -82,7 +82,7 @@ function app() {
                     if (oneListing.title.length >= 35) {
                         oneListing.short_title = (oneListing.title.substring(0, 35)) + '...';
                     } else if (oneListing.title.length < 35) {
-                      oneListing.short_title = oneListing.title;
+                        oneListing.short_title = oneListing.title;
                     }
                     var filledHTML = template(oneListing);
                     all_Listings += filledHTML;
@@ -101,6 +101,10 @@ function app() {
             $('#hoverListing').toggleClass('listingBox');
         });
         $('body').on('click', '.mask', function() {
+            $('body').toggleClass('noScroll');
+            $('#hoverListing').toggleClass('listingBox');
+        });
+        $('body').on('click', '.closeButton', function() {
             $('body').toggleClass('noScroll');
             $('#hoverListing').toggleClass('listingBox');
         });
