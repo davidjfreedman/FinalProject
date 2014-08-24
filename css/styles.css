@@ -570,6 +570,7 @@ p span {
     display: inline-block;
     padding: 4% 12%;
     min-width: 307px;
+    width: 100%;
     text-align: center;
 }
 .etsyButton {
@@ -642,27 +643,58 @@ a img {
     }
     .leftSide {
         display: inline-block;
-        width: 55%;
+        width: 54%;
         border-radius: 10px;
     }
     .imageBox {
         display: inline-block;
-        width: 55%;
+    }
+    .imageDiv {
+        height: 59vh;
+    }
+    .listingTitle {
+        padding: 1em;
+    }
+    .otherInfo {
+        padding-left: 4vh;
+    }
+    .sellerBox {
+        transform: scale(1);
+    }
+    .sellerText {
+        padding-top: 1vh;
+    }
+    .sellerBox img {
+        left: 0;
     }
     .infoContent {
+        vertical-align: top;
         display: inline-block;
         width: 44%;
     }
     .descriptionBox {
-        min-height: 60vh;
+        min-height: 68vh;
+        margin-bottom: 2vh;
     }
-    .imageDiv {
-        height: 50vh;
+    .shareItem {
+        display: block;
+        position: static;
+        top: 51.5%;
+        left: 86%;
+        transform: translate(0, 0);
+        border-radius: 5px;
+        background-color: grey;
+        z-index: 5;
     }
     .etsyButton {
         display: block;
     }
-    .listingTitle {
-        padding: 1em;
+    .closeButton {
+        left: 92%;
+    }
+}
+@media (min-width: 1030px) {
+    .sellerBox img {
+        min-width: 85px;
     }
 }
