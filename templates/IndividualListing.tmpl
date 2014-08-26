@@ -1,54 +1,54 @@
-<div class="listingBox" id="hoverListing">
-    <div class="mask"></div>
-    <div class="hoverListing">
-        <div class="imageBox">
-            <div class="arrowLeft"><i class="fa fa-chevron-left"></i>
-            </div>
-            <div class="arrowRight"><i class="fa fa-chevron-right"></i>
-            </div>
-            <!--position absolute at sides of image -->
-            <div class="imageDiv">
-                <img src="<%= mainImage %>">
-            </div>
-            <!--overall image div, width:100 if large,
-                width:half if small -->
-            <div class="listingTitle">
-                <h4><%= title %></h4>
-                <h6>
-                    <em>Only $<%= price %></em>
-                </h6>
-                <hr>
-            </div>
-            <div class="sellerBox" id="leftBox">
-            </div>
-            <!-- if the screen is large, this will be below the image -->
+<div class="leftSide">
+    <div class="imageBox">
+        <div class="shadowDiv"></div>
+        <div class="arrowLeft"><i class="fa fa-chevron-left"></i>
         </div>
-        <div class="infoContent">
-            <div class="descriptionBox">
-                <em>Description:</em>
-                <p><%= description %></p>
-            </div>
-            <!--this will show regardless -->
-            <div class="otherInfo">
-                <div class="uniqueness">Only <%= quantity %> left!<br>
-                <%= views %> others have viewed this item.</div>
+        <div class="arrowRight"><i class="fa fa-chevron-right"></i>
+        </div>
+        <div class="imageDiv">
+            <div class="imageDivLeft"></div>
+            <img src="http://placekitten.com/g/800/600">
+            <div class="imageDivRight"></div>
+        </div>
+        <div class="listingTitle">
+            <h4>
+                <%= title %>
+            </h4>
+            <h6>
+                <em>Only $
+                    <%= price %>
+                </em>
+            </h6>
+        </div>
+    </div>
+    <div class="otherInfo">
+        <div class="sellerBox" id="leftBox">
+            <img src="./images/seller.jpg">
+            <div class="sellerText">
+                <b>Insert Seller Name</b>
+                <br>
+                <p>Henderson, MO.
+                    <br>Rating:
+                    <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    </span><i class="fa fa-star"></i><i class="fa fa-star"></i> (6)</p>
             </div>
         </div>
-        <div class="etsyLink">
-            <a href="http://www.facebook.com">
-                <img src="http://www.tamusa.tamus.edu/uploadfile/folders/felopez5400/Image/Image-635399091568723656-10.100.150.124.jpg">
-            </a>
-            <a href="http://www.twitter.com">
-                <img src="http://maisonmouse.files.wordpress.com/2013/02/twitter-logo.jpg">
-            </a>
-            <a href="http://www.pinterest.com">
-                <img src="http://napiboldogsag.com/wp-content/uploads/1390599458_pinterest_icon.png">
-            </a>
-            <a href="<%= url %>">
-                <div class="etsyButton">
-                    <h4>View this item on Etsy</h4>
-                </div>
-            </a>
+        <div class="uniqueness"><i>Only <em><%= quantity %></em> Left!</i>
         </div>
+    </div>
+</div>
+<div class="infoContent">
+    <div class="descriptionBox">
+        <em>Description:</em>
+        <p>
+            <%= description %>
+        </p>
+    </div>
+    <div class="etsyLink">
+        <a href="<%= url %>">
+            <div class="etsyButton">
+                View this item on <b>Etsy</b>
+            </div>
+        </a>
     </div>
 </div>

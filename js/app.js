@@ -96,9 +96,17 @@ function app() {
     }
 
     EtsyClient.prototype.handleClickEvents = function() {
+        var self = this;
         $('body').on('click', '.Listing', function() {
+            // $.when(
+            //     this.showListingInfo())
+            var targetID = event.target.id;
+            $.when(
+                self.showListingInfo(targetID)
+            ).then(function() {
             $('body').toggleClass('noScroll');
             $('#hoverListing').toggleClass('listingBox');
+            });
         });
         $('body').on('click', '.mask', function() {
             $('body').toggleClass('noScroll');
@@ -113,12 +121,20 @@ function app() {
     EtsyClient.prototype.getListingInfo = function(id) {
         //this is run when the user clicks on one of the listings. The listings change the PATH, which triggers the js to run this function with the id provided by the link (put in by showlistings)
         var model = 'listings';
-        return $.getJSON(this.complete_api_url + model + '/' + id + ".js?api_key=" + this.api_key + "&callback=?").then(function(data) {
-            console.log(data);
-        });
+        return $.getJSON(this.etsy_url + this.version + model + '/' + id + ".js?api_key=" + this.api_key + "&callback=?");
     }
 
-    EtsyClient.prototype.showListingInfo = function(id) {}
+    EtsyClient.prototype.showListingInfo = function(id) {
+        var self = this;
+        $.when(
+            this.templateResults('../templates/IndividualListing.tmpl'),
+            this.getListingInfo(id)
+            ).then(function(templateFn, listing) {
+                var listingInfo = listing[0].results;
+                var FilledListing = templateFn(listingInfo[0]);
+                $('.hoverListing')[0].innerHTML = FilledListing;
+            })
+    }
 
 
 
