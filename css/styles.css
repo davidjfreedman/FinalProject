@@ -3,6 +3,10 @@
     -webkit-box-sizing: border-box;
     transition: all linear;
 }
+a {
+    text-decoration: none;
+    color: inherit;
+}
 body > * {
     font-family: serif;
     letter-spacing: 2px;
@@ -90,6 +94,7 @@ body > * {
     min-height: 100px;
     color: rgb(185, 170, 151);
     font-size: 0;
+    padding-top: 2%;
 }
 .mainHeader.active {
     position: fixed;
@@ -201,13 +206,19 @@ body > * {
     left: 0;
     z-index: 1;
 }
-.priceButton {
+.priceSection {
     display: block;
     width: 100%;
     text-align: center;
-    padding: 0.5em;
+    padding: 0.5em 0;
     background-color: rgb(202, 147, 104);
-    border: 2px solid rgb(202, 147, 104);
+}
+.priceButton {
+    display: block;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin: 0 auto;
+    padding: 0 1em;
 }
 .categories {
     display: block;
@@ -221,6 +232,10 @@ body > * {
     list-style-type: none;
     padding-left: 1em;
     font-size: 0.9em;
+}
+#Categories li:hover {
+    background-color: rgb(85, 70, 51);
+    color: rgb(185, 170, 151);
 }
 /* ---------------------------- */
 
@@ -271,7 +286,7 @@ body > * {
 .Listing {
     display: inline-block;
     width: 50%;
-    height: 325px;
+    height: 275px;
     margin: 0;
     margin-bottom: 2em;
     border-radius: 10px;
@@ -280,12 +295,14 @@ body > * {
     vertical-align: top;
     position: relative;
     padding-top: 5px;
-    filter: grayscale(100%);
-    transition: all 0.25s ease;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    filter: grayscale(90%);
+    transition: all 0.35s ease;
     overflow: hidden;
 }
 .Listing:hover {
     cursor: pointer;
+    border: 2px solid rgba(0, 0, 0, 0.6);
 }
 .Listing:hover {
     filter: grayscale(0%);
@@ -296,7 +313,8 @@ body > * {
     bottom: 0;
     padding: 5% 7.5%;
     width: 100%;
-    background-color: rgba(0,0,0,0.5);
+    min-height: 79px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .listingInfoInside h5, .listingInfoInside h6 {
     margin-bottom: 0;
@@ -369,9 +387,6 @@ body > * {
     }
 }
 @media (min-width: 501px) and (max-width: 850px) {
-    .mainHeader {
-        padding-top: 2%;
-    }
     .listingsDestination {
         width: 100%;
     }
@@ -411,17 +426,27 @@ body > * {
     .contentBlock {
         padding-left: 20%;
     }
+    .priceButton {
+        width: 100%;
+        font-size: 0.8em;
+    }
+}
+@media (min-width: 700px) {
+    .Listing {
+        height: 325px;
+    }
 }
 @media (min-width: 700px) and (max-width: 850px) {
     .Listing {
-        width: 32%;
+        width: 49%;
+    }
+    .priceButton {
+        width: 85%;
     }
 }
 @media (min-width: 850px) {
     .Listing {
-        width: 24%;
-        border: 1em;
-        border-color: transparent;
+        width: 32%;
     }
     .listingsDestination {
         width: 100%;
@@ -432,10 +457,30 @@ body > * {
     .listingInfoOutside {
         display: none;
     }
+    .priceButton {
+        width: 80%;
+        font-size: 1em;
+    }
 }
 @media (min-width: 970px) {
+    .Listing {
+        width: 32%;
+    }
     .navBar {
         padding-top: 3%;
+    }
+    .priceButton {
+        width: 75%;
+    }
+}
+@media (min-width: 1100px) {
+    .Listing {
+        width: 24%;
+        border: 1em;
+        border-color: transparent;
+    }
+    .priceButton {
+        width: 55%;
     }
 }
 /* ---------------------------- */
@@ -525,6 +570,9 @@ body > * {
     width: 50%;
     height: 100%;
 }
+.imageDivLeft:hover .arrowLeft {
+    background-color: rgba(0,0,255,0.2);
+}
 .imageDivRight {
     display: inline-block;
     position: absolute;
@@ -533,13 +581,13 @@ body > * {
     height: 100%;
 }
 .imageDivRight:hover .arrowRight {
-    background-color: orange;
+    background-color: rgba(0,0,255,0.2);
 }
 .arrowLeft {
     position: absolute;
-    top: 30%;
+    top: 50%;
     left: 0;
-    transform: translateY(-30%);
+    transform: translateY(-50%);
     width: 3%;
     min-height: 5%;
     z-index: 4;
@@ -547,12 +595,13 @@ body > * {
     text-align: center;
     background-color: gray;
     opacity: 0.6;
+    font-size: 1rem;
 }
 .arrowRight {
     position: absolute;
-    top: 30%;
+    top: 50%;
     right: 0;
-    transform: translateY(-30%);
+    transform: translateY(-50%);
     width: 3%;
     min-height: 5%;
     z-index: 4;
@@ -560,6 +609,7 @@ body > * {
     text-align: center;
     background-color: gray;
     opacity: 0.6;
+    font-size: 1rem;
 }
 .listingTitle {
     display: block;

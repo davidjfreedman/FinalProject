@@ -79,11 +79,19 @@ function app() {
             var search_results = listings[0].results;
             search_results.forEach(
                 function(oneListing) {
+                    console.log(oneListing.state)
+                });
+            search_results.forEach(
+                function(oneListing) {
+                    // if (oneListing.state != 'active') {
+                    //     search_results.indexOf(oneListing);
+                    // }
+                    
                     if (oneListing.title.length >= 35) {
                         oneListing.short_title = (oneListing.title.substring(0, 35)) + '...';
                     } else if (oneListing.title.length < 35) {
                         oneListing.short_title = oneListing.title;
-                    }
+                    };
                     var filledHTML = template(oneListing);
                     all_Listings += filledHTML;
                 });
@@ -104,8 +112,8 @@ function app() {
             $.when(
                 self.showListingInfo(targetID)
             ).then(function() {
-            $('body').toggleClass('noScroll');
-            $('#hoverListing').toggleClass('listingBox');
+                $('body').toggleClass('noScroll');
+                $('#hoverListing').toggleClass('listingBox');
             });
         });
         $('body').on('click', '.mask', function() {
@@ -121,7 +129,7 @@ function app() {
     EtsyClient.prototype.getListingInfo = function(id) {
         //this is run when the user clicks on one of the listings. The listings change the PATH, which triggers the js to run this function with the id provided by the link (put in by showlistings)
         var model = 'listings';
-        return $.getJSON(this.etsy_url + this.version + model + '/' + id + ".js?api_key=" + this.api_key + "&callback=?");
+        return $.getJSON(this.etsy_url + this.version + model + '/' + id + ".js?&includes=Images&api_key=" + this.api_key + "&callback=?");
     }
 
     EtsyClient.prototype.showListingInfo = function(id) {
@@ -129,11 +137,12 @@ function app() {
         $.when(
             this.templateResults('../templates/IndividualListing.tmpl'),
             this.getListingInfo(id)
-            ).then(function(templateFn, listing) {
-                var listingInfo = listing[0].results;
-                var FilledListing = templateFn(listingInfo[0]);
-                $('.hoverListing')[0].innerHTML = FilledListing;
-            })
+        ).then(function(templateFn, listing) {
+            console.log(listing[0]);
+            var listingInfo = listing[0].results;
+            var FilledListing = templateFn(listingInfo[0]);
+            $('.hoverListing')[0].innerHTML = FilledListing;
+        })
     }
 
 
