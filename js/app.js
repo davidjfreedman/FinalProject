@@ -134,7 +134,7 @@ function app() {
         // $('.ListingsDestination')[0].innerHTML = '';
 
         $.when(
-            this.templateResults('../templates/IndividualRandomListing.tmpl'),
+            this.templateResults('../templates/IndividualListing.tmpl'),
             $.getJSON(uriForRandomJSON)
         ).then(function(templateFn, listings) {
             console.log(listings[0].results[randomListing]);
