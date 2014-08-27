@@ -2,19 +2,21 @@
     <div class="imageBox">
         <div class="shadowDiv"></div>
         <div class="imageDiv">
-            <div class="imageDivLeft">        
+            <div class="itemImages">
+<!--                 <img src="<%= Images[0].url_fullxfull %>">
+ -->            </div>
+            <div class="imageDivLeft" id="imageDivLeft">        
                 <div class="arrowLeft"><i class="fa fa-chevron-left"></i>
+                </div>
             </div>
-        </div>
-        <img src="<%= Images[0].url_fullxfull %>">
-            <div class="imageDivRight">
+            <div class="imageDivRight" id="imageDivRight">
                 <div class="arrowRight"><i class="fa fa-chevron-right"></i>
                 </div>
             </div>
         </div>
         <div class="listingTitle">
             <h4>
-                <%= title %>
+                <span title="<%= title %>"><%= short_title %></span>
             </h4>
             <h6>
                 <em>Only $
@@ -25,15 +27,6 @@
     </div>
     <div class="otherInfo">
         <div class="sellerBox" id="leftBox">
-            <img src="./images/seller.jpg">
-            <div class="sellerText">
-                <b>Insert Seller Name</b>
-                <br>
-                <p>Henderson, MO.
-                    <br>Rating:
-                    <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                    </span><i class="fa fa-star"></i><i class="fa fa-star"></i> (6)</p>
-            </div>
         </div>
         <div class="uniqueness"><i>Only <em><%= quantity %></em> Left!</i>
         </div>

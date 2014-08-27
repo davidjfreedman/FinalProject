@@ -201,14 +201,16 @@ body > * {
     margin-top: 0;
     color: rgb(39, 31, 18);
     position: absolute;
-    z-index: 1;
-}
-.sideBar.active {
-    position: fixed;
-    top: 100px;
+    top: 100%;
     left: 0;
     z-index: 1;
+    font-size: 1rem;
 }
+/*.sideBar.active {
+    position: fixed;
+    z-index: 1;
+}*/
+
 .priceSection {
     display: block;
     width: 100%;
@@ -242,6 +244,10 @@ body > * {
     display: block;
     width: 100%;
     margin-top: -32;
+}
+.categoryCentering {
+    display: block;
+    margin: 0 auto;
 }
 #Categories {
     padding: 1em;
@@ -338,7 +344,7 @@ body > * {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
     transform: rotate(45deg);
-    width: 63%;
+    width: 80%;
 }
 .listingInfoInside {
     display: none;
@@ -357,6 +363,9 @@ body > * {
 }
 .priceDisplay {
     display: none;
+    position: absolute;
+    bottom: 12;
+    right: 12;
 }
 .listingInfoInside h5 {
     font-size: 1em;
@@ -367,7 +376,6 @@ body > * {
     text-align: right;
     font-size: 0.68em;
 }
-
 .listingInfoOutside {
     display: inline-block;
     padding-left: 0.4em;
@@ -460,6 +468,9 @@ body > * {
     .sideBar {
         display: inline-block;
     }
+    .categoryCentering {
+        width: 108%;
+    }
     .contentBlock {
         padding-left: 20%;
     }
@@ -472,6 +483,9 @@ body > * {
     .Listing {
         height: 325px;
     }
+    .categoryCentering {
+        width: 91%;
+    }
 }
 @media (min-width: 700px) and (max-width: 850px) {
     .Listing {
@@ -480,8 +494,14 @@ body > * {
     .priceButton {
         width: 85%;
     }
+    .saleBanner {
+        right: -65;
+    }
 }
 @media (min-width: 850px) {
+    .categoryCentering {
+        width: 84%;
+    }
     .Listing {
         width: 32%;
     }
@@ -495,7 +515,7 @@ body > * {
         display: none;
     }
     .priceButton {
-        width: 80%;
+        width: 85%;
         font-size: 1em;
     }
 }
@@ -506,18 +526,40 @@ body > * {
     .navBar {
         padding-top: 3%;
     }
-    .priceButton {
+    .categoryCentering {
         width: 75%;
+    }
+    .priceButton {
+        width: 80%;
     }
 }
 @media (min-width: 1100px) {
+    .categoryCentering {
+        width: 87%;
+    }
     .Listing {
         width: 24%;
         border: 1em;
         border-color: transparent;
     }
+    .sideBar {
+        width: 14%;
+    }
+    .contentBlock {
+        padding-left: 15%;
+    }
     .priceButton {
-        width: 55%;
+        width: 75%;
+    }
+    .saleBanner {
+        top: 45;
+        right: -63;
+        width: 100%;
+    }
+}
+@media (min-width: 1300px) {
+    .saleBanner {
+        right: -80;
     }
 }
 /* ---------------------------- */
@@ -574,6 +616,7 @@ body > * {
     display: block;
     position: relative;
     min-height: 40%;
+    max-height: 49%;
     width: 100%;
     overflow: hidden;
     border-radius: 10px;
@@ -590,15 +633,15 @@ body > * {
 .imageDiv {
     display: block;
     position: relative;
-    background-color: blue;
     width: 100%;
     height: 30vh;
+    max-height: 34%;
+    text-align: center;
     overflow: hidden;
     font-size: 0;
 }
 .imageDiv img {
-    width: 100%;
-    min-height: 100%;
+    height: 100%;
 }
 .imageDivLeft {
     display: inline-block;
@@ -609,6 +652,14 @@ body > * {
 }
 .imageDivLeft:hover .arrowLeft {
     background-color: rgba(0, 0, 255, 0.2);
+}
+.itemImages {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 .imageDivRight {
     display: inline-block;
@@ -653,11 +704,16 @@ body > * {
     width: 100%;
     text-align: center;
     padding: 0.35em 0;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 .listingTitle * {
     color: white;
+    font-size: 1em;
     line-height: 1;
     margin-bottom: 5;
+}
+.listingTitle h6 {
+    font-size: 0.9em;
 }
 .otherInfo {
     display: block;
@@ -691,9 +747,14 @@ body > * {
     text-indent: 0.05;
     margin-bottom: 0.5em;
 }
-p span {
+.yellow {
     color: yellow;
-    margin-right: -5px;
+}
+.white {
+    color: white;
+}
+.noRating {
+    display: none;
 }
 .uniqueness {
     position: absolute;
@@ -757,11 +818,20 @@ p span {
     text-align: center;
     border-radius: 7px;
     padding: 0.25em 0.5em;
-    background-color: rgb(227, 72, 0);
+    background: -moz-linear-gradient(top, #f06b2d 0%, #a84619);
+    background: -webkit-gradient(linear, left top, left bottom, from(#f06b2d), to(#a84619));
     color: white;
     vertical-align: middle;
     font-family: serif;
     border: 1px solid rgb(192, 163, 116);
+}
+.etsyButton:hover {
+    background: -moz-linear-gradient(top, #f06b2d 0%, #5e2913 5%, #a84619);
+    background: -webkit-gradient(linear, left top, left bottom, from(#f06b2d), color-stop(0.50, #5e2913), to(#a84619));
+}
+.etsyButton:active {
+    background: -moz-linear-gradient(top, #a83b09 0%, #a6674c 5%, #752f11);
+    background: -webkit-gradient(linear, left top, left bottom, from(#a83b09), color-stop(0.5, #a6674c), to(#752f11));
 }
 /* ---------------------------- */
 
@@ -832,9 +902,11 @@ a img {
     }
     .imageBox {
         display: inline-block;
+        max-height: 82%;
     }
     .imageDiv {
         height: 59vh;
+        max-height: 59%;
     }
     .listingTitle {
         padding: 1em;

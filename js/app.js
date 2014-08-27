@@ -6,18 +6,18 @@ function app() {
     //===========================//
 
     var header = document.querySelector('.mainHeader');
-    var sidebar = document.querySelector('.sideBar');
+    // var sidebar = document.querySelector('.sideBar');
     var content = document.querySelector('.contentBlock')
     var pusher = document.querySelector('.verticalPusher');
 
     $(window).on('scroll', function() {
         if (window.scrollY >= pusher.offsetHeight) {
             $(header).addClass('active');
-            $(sidebar).addClass('active');
+            // $(sidebar).addClass('active');
             $(content).addClass('active');
         } else {
             $(header).removeClass('active');
-            $(sidebar).removeClass('active');
+            // $(sidebar).removeClass('active');
             $(content).removeClass('active')
 
         }
@@ -83,13 +83,13 @@ function app() {
             search_results = _.filter(search_results, function(listing) {
                 return (listing.state === "active");
             })
-                    //use the following line if there's a state issue:
-                    // console.log(oneListing.state)
+            //use the following line if there's a state issue:
+            // console.log(oneListing.state)
             search_results.forEach(
                 function(oneListing) {
-                    if (oneListing.title.length >= 35) {
-                        oneListing.short_title = (oneListing.title.substring(0, 35)) + '...';
-                    } else if (oneListing.title.length < 35) {
+                    if (oneListing.title.length >= 30) {
+                        oneListing.short_title = (oneListing.title.substring(0, 30)) + '...';
+                    } else if (oneListing.title.length < 30) {
                         oneListing.short_title = oneListing.title;
                     };
                     var filledHTML = template(oneListing);
@@ -109,26 +109,74 @@ function app() {
         return $.getJSON(this.etsy_url + this.version + model + '/' + id + ".js?&includes=Images&api_key=" + this.api_key + "&callback=?");
     }
 
+    EtsyClient.prototype.showUserInfo = function(id) {
+        var p = $.Deferred();
+        $.when(
+            this.templateResults('../templates/sellerInfo.tmpl'),
+            $.getJSON(this.etsy_url + this.version + "users/" + id + ".js?&api_key=" + this.api_key + "&callback=?"),
+            $.getJSON(this.etsy_url + this.version + "users/" + id + "/profile.js?&api_key=" + this.api_key + "&callback=?")
+        ).then(function(templateFn, userInfo, profile) {
+            var sellerInfo = userInfo[0].results;
+            var feedbackScore = sellerInfo[0].feedback_info.score;
+            console.log(sellerInfo[0].feedback_info.score);
+            var profileImage = profile[0].results[0].image_url_75x75;
+            var FilledListing = templateFn(sellerInfo[0]);
+            $('.sellerBox')[0].innerHTML = FilledListing;
+            if (feedbackScore != null) {
+                console.log('score test');
+                // && feedbackScore <= 25) {
+                //     $('.star1').toggleClass()
+            } else(
+                    function() {
+                        $(".yesRating").toggle();
+                        $(".noRating").toggle();
+                    })
+                //if score is null, toggle rating and notenoughinfo
+                //if score is 1-25, toggle white/yellow on 1
+        })
+        return p;
+    }
+
     EtsyClient.prototype.showListingInfo = function(id) {
         var self = this;
+        var p = $.Deferred();
         $.when(
             this.templateResults('../templates/IndividualListing.tmpl'),
             this.getListingInfo(id)
         ).then(function(templateFn, listing) {
             console.log(listing[0]);
             var listingInfo = listing[0].results;
+            var listingImageset = listing[0].results[0].Images;
+            listingImages = [];
+            listingImageset.forEach(
+                function(imageObject) {
+                    listingImages.push(imageObject.url_fullxfull + "")
+                });
+
+            //shortening the title, if necessary
+            if (listingInfo[0].title.length >= 50) {
+                listingInfo[0].short_title = (listingInfo[0].title.substring(0, 50)) + '...';
+            } else if (listingInfo[0].title.length < 50) {
+                listingInfo[0].short_title = listingInfo[0].title;
+            };
+
             var FilledListing = templateFn(listingInfo[0]);
             $('.hoverListing')[0].innerHTML = FilledListing;
-        })
+            $('.itemImages')[0].innerHTML = '<img src="' + listingImages[0] + '">';
+            self.showUserInfo(listing[0].results[0].user_id);
+            p.resolve();
+        });
+        return p;
     }
 
     EtsyClient.prototype.showRandomListing = function() {
         var self = this;
+        var p = $.Deferred();
         if (typeof results_amount === 'undefined') {
             alert('Please wait for the page to fully load.')
         };
         var randomOffset = Math.floor(Math.random() * (results_amount - this.num_listings));
-        var randomListing = Math.floor(Math.random() * this.num_listings);
+        var randomListingNumber = Math.floor(Math.random() * this.num_listings);
         var uriForRandomJSON = this.etsy_url + this.version + "listings/active" + ".js?limit=" + this.num_listings + "&min_price=100000&offset=" + randomOffset + "&includes=Images&api_key=" + this.api_key + "&callback=?";
         console.log(randomOffset + " out of " + results_amount);
         // $('.ListingsDestination')[0].innerHTML = '';
@@ -137,16 +185,34 @@ function app() {
             this.templateResults('../templates/IndividualListing.tmpl'),
             $.getJSON(uriForRandomJSON)
         ).then(function(templateFn, listings) {
-            console.log(listings[0].results[randomListing]);
-            var FilledListing = templateFn(listings[0].results[randomListing]);
+            var randomListing = listings[0].results[randomListingNumber];
+            console.log(randomListing);
+            var listingImageset = randomListing.Images;
+            listingImages = [];
+            listingImageset.forEach(
+                function(imageObject) {
+                    listingImages.push(imageObject.url_fullxfull + "")
+                });
+
+            //shortening the title, if necessary
+            if (randomListing.title.length >= 50) {
+                randomListing.short_title = (randomListing.title.substring(0, 50)) + '...';
+            } else if (randomListing.title.length < 50) {
+                randomListing.short_title = randomListing.title;
+            };
+
+            var FilledListing = templateFn(randomListing);
             $('.hoverListing')[0].innerHTML = FilledListing;
+            $('.itemImages')[0].innerHTML = '<img src="' + listingImages[0] + '">';
+            self.showUserInfo(randomListing.user_id);
+            p.resolve();
         });
+        return p;
         //.when(
         //3. getListings with offset from step 1
         //4. show listing information of item in array place number chosen in step 2
         //)
         //
-        this.offset = 0;
     }
 
     EtsyClient.prototype.showClearance = function() {
@@ -156,6 +222,8 @@ function app() {
     }
 
     EtsyClient.prototype.handleClickEvents = function() {
+
+
 
         //  Opening the modal
         var self = this;
@@ -183,17 +251,23 @@ function app() {
 
         //  Clearance Section Click
         $('body').on('click', '.clearance', function() {
-            self.showClearance();
-            setTimeout(function() {
-                //the following line is useful for showing timing of display:
-                // console.log($(".saleBanner").css('display'), ($(".saleBanner").css('display') == "none"));
-                if ($(".saleBanner").css('display') == "none") {
-                    $(".saleBanner").toggle();
-                    // css('display')) = "block";
-                    // $(".saleBanner").toggle();
-                };
-            }, 2500)
+            if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
+                console.log("already displaying gallery")
+                return;
+            } else {
+                self.showClearance();
+                setTimeout(function() {
+                    //the following line is useful for showing timing of display:
+                    // console.log($(".saleBanner").css('display'), ($(".saleBanner").css('display') == "none"));
+                    if ($(".saleBanner").css('display') == "none") {
+                        $(".saleBanner").toggle();
+                        // css('display')) = "block";
+                        // $(".saleBanner").toggle();
 
+                    }
+                }, 2500)
+
+            }
         });
 
 
@@ -241,6 +315,27 @@ function app() {
             }
         });
 
+        //  Handling images left
+        $('body').delegate('.imageDivLeft', 'click', function() {
+            var currentImageURL = $('.itemImages')[0].innerHTML.replace('<img src="', '').replace('">', '');
+            currentImage = listingImages.indexOf(currentImageURL) - 1;
+            if (currentImage < 0) {
+                currentImage = listingImages.length - 1;
+            }
+            $('.itemImages')[0].innerHTML = '<img src="' + listingImages[currentImage] + '">';
+
+
+        });
+
+        //  Handling images right
+        $('body').delegate('.imageDivRight', 'click', function() {
+            var currentImageURL = $('.itemImages')[0].innerHTML.replace('<img src="', '').replace('">', '');
+            currentImage = listingImages.indexOf(currentImageURL) + 1;
+            if (currentImage > listingImages.length - 1) {
+                currentImage = 0;
+            }
+            $('.itemImages')[0].innerHTML = '<img src="' + listingImages[currentImage] + '">';
+        });
 
         //  Displaying/Hiding prices
         $('body').on('click', '.priceButton', function() {

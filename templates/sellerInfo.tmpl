@@ -1,5 +1,13 @@
-                <img src="<%= sellerimage %>">
-                <b><%= seller %></b>
-                <br>
-                <b><%= sellerLoca %></b><br>
-                Seller Rating: <%= rating %>
+<div class="sellerImage">
+	<img src="./images/seller.jpg">
+</div>
+<div class="sellerText">
+    <b><%= login_name %></b>
+    <br>
+    <p class="yesRating">Rating:
+    <i class="fa fa-star yellow star1"></i><i class="fa fa-star yellow star2"></i><i class="fa fa-star yellow star3"></i><i class="fa fa-star white star4"></i><i class="fa fa-star white star5"></i> (
+    <%= feedback_info.count %>)</p>
+    <p class="noRating">Rating:
+    <i>New User! (
+    <%= feedback_info.count %>)</i></p>
+</div>
