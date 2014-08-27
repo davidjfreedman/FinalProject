@@ -52,7 +52,7 @@ function app() {
         if (!pricemax) {
             var complete_api_URL = (this.etsy_url + this.version + model + filter + ".js?limit=" + this.num_listings + "&min_price=" + pricemin + "&offset=" + this.offset + "&includes=MainImage&api_key=" + this.api_key + "&callback=?");
         } else {
-            var complete_api_URL = (this.etsy_url + this.version + model + filter + ".js?limit=" + num_listings + "&min_price=" + pricemin + "&max_price=" + pricemax + "&offset=" + this.offset + "&includes=MainImage&api_key=" + this.api_key + "&callback=?");
+            var complete_api_URL = (this.etsy_url + this.version + model + filter + ".js?limit=" + this.num_listings + "&min_price=" + pricemin + "&max_price=" + pricemax + "&offset=" + this.offset + "&includes=MainImage&api_key=" + this.api_key + "&callback=?");
         };
         if (!query) {
             return $.getJSON(complete_api_URL);
