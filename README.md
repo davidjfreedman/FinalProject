@@ -5,7 +5,8 @@ Final Project - Affluentsy (in progress)
 
 **Project:** Create something amazing using what you've learned in the class.
 
-**Description:** Taking a cue from an earlier assignment and drawing inspiration from Buzzfeed-style lists of the 'weirdest products on x store', I chose to create Affluentsy.  
+**Description:** Taking a cue from an earlier assignment and drawing inspiration from Buzzfeed-style lists of the 'weirdest products on x store', I chose to create Affluentsy.
+
 The site draws its name inspiration and the data from Etsy's API, culling a list of the most expensive products on the Etsy storefront (the reason being that the most expensive products are often also the weirdest).
 
 On one hand, I tried to emulate the look, feel and functionality of a higher-end online store. Users have the option to curate their experience using categories, search functionality, and result sorting as they would on a normal web-store. However, given the absurdity of many of the products and pricing as a whole, I did try to give a tongue-in-cheek feel in little ways:
