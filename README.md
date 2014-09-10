@@ -1,21 +1,31 @@
-# How to use your server
-1. clone / copy the files (server.js, package.json, Procfile) to your computer or project folder
-2. `npm install`
-3. `echo "node_modules" > .gitignore`
-4. `node server.js <port number>` - where port number is any number (try 9000 for starters)
-5. open your browser to `localhost:<port number>`
-5. When you are ready to turn off the server, hit `CTRL + C`
+FinalProject
+============
 
-# What does this give you?
-1. Myth CSS PostProcessor (http://myth.io)
-2. serves you files all nice and dandy
-3. sets us up to push our own servers to heroku! (more to come)
+Final Project - Affluentsy (in progress)
 
-# Want to push your local server to a live server?
-1. setup a Heroku account
-2. install the Heroku toolbelt: https://s3.amazonaws.com/assets.heroku.com/heroku-toolbelt/heroku-toolbelt.pkg
-3. run `heroku login` in your terminal
-4. create a random Heroku server with `heroku create`; this will register a remote git endpoint for you (`git remote -v`), which should now show Github (origin) and Heroku
-5. then finally push your code repo up to Heroku (yes you can push to Github OR Heroku!) via a git push: `git push heroku master`
-6. run `heroku ps:scale web=1` to spin-up some resources for your app
-7. from here on out, anytime you want to push to the same heroku server, you only need to repeat step 6.
+**Project:** Create something amazing using what you've learned in the class.
+
+**Description:** Taking a cue from an earlier assignment and drawing inspiration from Buzzfeed-style lists of the 'weirdest products on x store', I chose to create Affluentsy.
+
+The site draws its name inspiration and the data from Etsy's API, culling a list of the most expensive products on the Etsy storefront (the reason being that the most expensive products are often also the weirdest).
+
+On one hand, I tried to emulate the look, feel and functionality of a higher-end online store. Users have the option to curate their experience using categories, search functionality, and result sorting as they would on a normal web-store. However, given the absurdity of many of the products and pricing as a whole, I did try to give a tongue-in-cheek feel in little ways:
+  * As on the menu in a fancy dining establishment, the prices are not initially shown. There is a button that allows you to "ask for the price", with the implied suggestion (as in those restaurants) that if you have to ask the price, you probably shouldn't be there.
+  * The subtly sarcastic taglines ('Luxury. Quality. Etsy.' and 'Only the finest handmade luxury items').
+  * The 'Clearance' section, in which only products under $100k are shown (though not under $10k; we must have standards!), and the accompanying 'sale' banners on these probably preposterously priced products.
+  
+*The site is dynamically-resizeable for display at most screen-sizes*
+
+**Why?:** I like quirkiness, and I felt that it would be interesting having a site that continually updates with new weird products. I also wanted an opportunity to challenge myself with APIs and replicating real-life storefront look and functionality. 
+
+**Tech Used (as of current version):** jQuery, Javascript, Myth, lodash/underscore templating, FontAwesome, Photoshop, JS Prototypes, Node.js, Etsy API, heroku, HTML, CSS, CSS3.
+
+**Future updates:**
+  * Search functionality
+  * Category implementation
+  * Sorting implementation
+  * Fine-tuning the data pulled to present a more curated, 'weirder' list.
+  * Infinite scrolling for results (new pages added on scroll to bottom)
+  * Backbone integration
+  * Path-style implementation to allow for linking to individual listings, the different sections of the website, and sections of results
+  * Mobile site functionality improvement.
