@@ -50,6 +50,13 @@ body > * {
     text-align: right;
     padding: 1em;
 }
+.splashPage > p:hover {
+    color: rgb(223, 223, 223);
+}
+.splashPage > p:active {
+    color: rgb(167, 167, 167);
+    font-weight: 700;
+}
 .centerArea {
     text-align: center;
     position: absolute;
@@ -140,6 +147,12 @@ body > * {
 .navBar span {
     cursor: pointer;
 }
+.navBar span:hover {
+    color: rgb(223, 205, 183);
+}
+.navBar span:active {
+    color: rgb(138, 125, 110);
+}
 .rightSection {
     display: inline-block;
     width: 38%;
@@ -150,6 +163,12 @@ body > * {
     display: block;
     vertical-align: middle;
     text-align: right;
+}
+.topLinks a:hover {
+    color: rgb(223, 205, 183);
+}
+.topLinks a:active {
+    color: rgb(138, 125, 110);
 }
 .searchBar {
     vertical-align: middle;
@@ -263,6 +282,28 @@ body > * {
     background-color: rgb(85, 70, 51);
     color: rgb(185, 170, 151);
 }
+#Categories li:active {
+    background-color: rgb(54, 46, 35);
+    color: rgb(233, 212, 186);
+}
+/* ---------------------------- */
+
+/*                              */
+
+/*            SPINNER           */
+
+/*                              */
+
+/* ---------------------------- */
+
+.spinnerDiv {
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+}
+.spinnerDiv img {
+    height: 50px;
+}
 /* ---------------------------- */
 
 /*                              */
@@ -284,7 +325,7 @@ body > * {
     margin: 0 auto;
 }
 .contentBlock.active {
-    padding-top: 150px;
+    padding-top: 120px;
 }
 .listingsNav {
     display: block;
@@ -332,6 +373,15 @@ body > * {
 }
 .Listing:hover {
     filter: grayscale(0%);
+}
+.clickSurface {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 .saleBanner {
     display: none;

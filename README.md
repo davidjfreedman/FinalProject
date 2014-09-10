@@ -21,10 +21,9 @@ On one hand, I tried to emulate the look, feel and functionality of a higher-end
 **Tech Used (as of current version):** jQuery, Javascript, Myth, lodash/underscore templating, FontAwesome, Photoshop, JS Prototypes, Node.js, Etsy API, heroku, HTML, CSS, CSS3.
 
 **Future updates:**
-  * Search functionality
-  * Category implementation
   * Sorting implementation
   * Fine-tuning the data pulled to present a more curated, 'weirder' list.
+  * Working on certain categories to pull more products
   * Infinite scrolling for results (new pages added on scroll to bottom)
   * Backbone integration
   * Path-style implementation to allow for linking to individual listings, the different sections of the website, and sections of results

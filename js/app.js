@@ -35,6 +35,7 @@ function app() {
         this.version = 'v2/';
         this.offset = 0;
         this.num_listings = 20;
+        this.spinnerTemplate = '<div class="spinnerDiv"><img src="./images/spinner.gif"></div>';
 
     }
 
@@ -65,8 +66,6 @@ function app() {
         return $.getJSON(complete_api_URL);
     }
 
-    // elses (if string, if number, multistring, errors)
-    // } else if (typeof query === 'string')
 
     EtsyClient.prototype.templateResults = function(url) {
         return $.get(url).then(function(my_template) {
@@ -219,15 +218,10 @@ function app() {
             p.resolve();
         });
         return p;
-        //.when(
-        //3. getListings with offset from step 1
-        //4. show listing information of item in array place number chosen in step 2
-        //)
-        //
     }
 
     EtsyClient.prototype.showClearance = function() {
-        $('.ListingsDestination')[0].innerHTML = '';
+        $('.ListingsDestination')[0].innerHTML = this.spinnerTemplate;
         this.showListings('', '', 10000, 10000);
 
     }
@@ -238,7 +232,7 @@ function app() {
 
         //  Opening the modal
         var self = this;
-        $('body').on('click', '.Listing', function() {
+        $('body').on('click', '.clickSurface', function() {
             // $.when(
             //     this.showListingInfo())
             var targetID = event.target.id;
@@ -286,7 +280,7 @@ function app() {
         $('body').on('click', '.gallery', function() {
             // first checks to see if Listings are shown, and if they're the clearance section
             if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
-                $(".ListingsDestination")[0].innerHTML = "";
+                $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
                 self.showListings('', '', 100000, '');
             }
 
@@ -326,6 +320,7 @@ function app() {
             }
         });
 
+
         //  Category click
 
         $('.categories').on('click', 'li', function() {
@@ -345,17 +340,14 @@ function app() {
                 var query = 'children';
                 var min_price = 1000;
             };
-            $('.ListingsDestination')[0].innerHTML = '';
+            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
             self.showListings(query, category, min_price, '');
 
         });
-        // 1. on click of li in sidebar
-        // 3. clear out the content box
-        // 4. showlistings using
 
-        //  Search Queries
 
-        $('.searchBox').on('submit', function(e) {
+        //  Search Queries - NavBar
+        $('.navSearch').on('submit', function(e) {
             e.preventDefault();
             var searchQuery = ($(".sBox").val());
             // error-throwing for improper searches
@@ -363,17 +355,27 @@ function app() {
                 console.log('please input a proper search query');
                 return
             };
-            //1.5. if from topsearch class, scroll page to results
-            // if ($(this).hasClass(".topSearch")) {
-            //     console.log('true');
-            // };
+            $('.ListingsDestination')[0].innerHTML = this.spinnerTemplate;
+            self.showListings(searchQuery, '', 10000, '');
+        });
 
-            //2. implement a new search using that value that doesn't refresh the page
-            $('.ListingsDestination')[0].innerHTML = '';
+
+        //  Search Queries - Splash Page
+        $('.topSearch').on('submit', function(e) {
+            e.preventDefault();
+            var searchQuery = ($(".topSBox").val());
+            // error-throwing for improper searches
+            if (searchQuery === '' || searchQuery === '?' || searchQuery === '#') {
+                console.log('please input a proper search query');
+                return
+            };
+            $('html, body').animate({
+                scrollTop: $(".mainHeader").offset().top
+            }, 700);
+            $('.ListingsDestination')[0].innerHTML = this.spinnerTemplate;
             self.showListings(searchQuery, '', 10000, '');
             //3. test for errors using different search queries
         });
-
 
         //  Handling images left
         $('body').delegate('.imageDivLeft', 'click', function() {
@@ -411,13 +413,11 @@ function app() {
         //     var selectedSorting = ($(this).val());
         //     console.log(selectedSorting);
         // });
-    }
+    };
 
     var Affluentsy = new EtsyClient;
     Affluentsy.showListings('', '', 100000, '');
     Affluentsy.handleClickEvents();
-    console.log(($("saleBanner").css("display")));
-    alert("Certain functions are not currently in place, but will be implemented over the next few days. Please view the readme on Github for more info.");
 }
 
 //need routing prototype
