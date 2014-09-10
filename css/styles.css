@@ -129,12 +129,45 @@ body > * {
     vertical-align: top;
     padding-top: 10%;
 }
+.menuButtonSpace {
+    display: block;
+    width: 61%;
+    margin: 0 auto;
+    position: relative;
+    min-height: 2em;
+}
 .menuButton {
     display: block;
     border-radius: 10px;
     border: 1px solid rgb(185, 170, 151);
-    width: 60%;
+    background-color: rgb(41, 35, 26);
+    width: 100%;
     margin: 0 auto;
+    z-index: 2;
+    position: relative;
+    min-height: 2em;
+}
+.menuDroppedDown {
+    display: block;
+    position: absolute;
+    top: 60%;
+    left: -70%;
+    border-radius: 10px;
+    border: 1px solid rgb(185, 170, 151);
+    background-color: rgb(41, 35, 26);
+    z-index: 1;
+    list-style-type: none;
+    text-shadow: 0px 1px 2px black;
+}
+.menuDroppedDown ul {
+    padding: 0.6em 1em 0;
+}
+.menuDroppedDown li {
+    margin-bottom: 0.3em;
+    border-radius: 10px;
+    border: 1px solid rgb(185, 170, 151);
+    list-style-type: none;
+    text-indent: 0
 }
 .navBar {
     display: none;

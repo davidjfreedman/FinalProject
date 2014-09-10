@@ -355,8 +355,12 @@ function app() {
                 console.log('please input a proper search query');
                 return
             };
-            $('.ListingsDestination')[0].innerHTML = this.spinnerTemplate;
+            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
             self.showListings(searchQuery, '', 10000, '');
+            if ($(".priceSection").hasClass('ps_on_BG')) {
+                console.log('test');
+                $(".priceDisplay").toggle();
+            }
         });
 
 
@@ -372,7 +376,7 @@ function app() {
             $('html, body').animate({
                 scrollTop: $(".mainHeader").offset().top
             }, 700);
-            $('.ListingsDestination')[0].innerHTML = this.spinnerTemplate;
+            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
             self.showListings(searchQuery, '', 10000, '');
             //3. test for errors using different search queries
         });
@@ -405,6 +409,11 @@ function app() {
             $(".priceSection").toggleClass("ps_off_BG");
             $(".priceSection").toggleClass("ps_on_BG");
         });
+
+        if ($(".priceSection").hasClass('ps_on_BG')) {
+            $(".priceDisplay").toggle();
+        }
+
 
 
         //Handling sorting box
