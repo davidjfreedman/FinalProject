@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="listingTitle">
+        <span title="<%= title %>"><div class="listingTitle">
             <h4>
                 <span title="<%= title %>"><%= short_title %></span>
             </h4>
@@ -23,7 +23,7 @@
                     <%= price %>
                 </em>
             </h6>
-        </div>
+        </div></span>
     </div>
     <div class="otherInfo">
         <div class="sellerBox" id="leftBox">
@@ -40,7 +40,7 @@
         </p>
     </div>
     <div class="etsyLink">
-        <a href="<%= url %>">
+        <a href="<%= url %>" target="_blank">
             <div class="etsyButton">
                 View this item on <b>Etsy</b>
             </div>

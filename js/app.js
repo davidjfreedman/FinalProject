@@ -34,6 +34,8 @@ function app() {
         this.etsy_url = 'https://openapi.etsy.com/';
         this.version = 'v2/';
         this.offset = 0;
+        this.sort_on = 'created';
+        this.sort_order = 'down';
         this.num_listings = 20;
         this.spinnerTemplate = '<div class="spinnerDiv"><img src="./images/spinner.gif"></div>';
 
@@ -50,7 +52,7 @@ function app() {
         var model = 'listings/';
         var filter = 'active';
         var self = this;
-        var complete_api_URL = this.etsy_url + this.version + model + filter + ".js?limit=" + this.num_listings + "&min_price=" + pricemin + "&offset=" + this.offset + "&includes=MainImage";
+        var complete_api_URL = this.etsy_url + this.version + model + filter + ".js?limit=" + this.num_listings + "&min_price=" + pricemin + "&offset=" + this.offset + "&sort_on=" + this.sort_on + "&sort_order=" + this.sort_order + "&includes=MainImage";
         var mainURLEnd = "&api_key=" + this.api_key + "&callback=?";
         if (!!category) {
             var complete_api_URL = complete_api_URL + "&category=" + category;
@@ -84,7 +86,7 @@ function app() {
         ).then(function(template, listings) {
             console.log(listings[0]);
             results_amount = listings[0].count;
-            var search_results = listings[0].results;
+            search_results = listings[0].results;
             search_results = _.filter(search_results, function(listing) {
                 return (listing.state === "active");
             })
@@ -261,11 +263,11 @@ function app() {
 
         //  Clearance Section Click
         $('body').on('click', '.clearance', function() {
+            menuButtonClickTest();
             if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
                 console.log("already displaying clearance")
                 return;
             } else {
-                menuButtonClickTest();
                 self.showClearance();
                 setTimeout(function() {
                     //the following line is useful for showing timing of display:
@@ -286,11 +288,10 @@ function app() {
         $('body').on('click', '.gallery', function() {
             // first checks if the user clicked on the drop down button
             console.log((!!($(".menuButton").hasClass("active"))));
-
+            menuButtonClickTest();
             // first checks to see if Listings are shown, and if they're in the clearance section
             if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
                 $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
-                menuButtonClickTest();
                 self.showListings('', '', 100000, '');
             }
 
@@ -303,7 +304,6 @@ function app() {
 
             // lastly, checks if Listings are not there
             else if ($(".ListingsDestination")[0].innerHTML === "") {
-                menuButtonClickTest();
                 self.showListings('', '', 100000, '');
 
             }
@@ -422,23 +422,45 @@ function app() {
 
         //  Displaying/Hiding prices
         $('body').on('click', '.priceButton', function() {
-            $(".priceDisplay").toggle();
-            $(".priceSection").toggleClass("ps_off_BG");
-            $(".priceSection").toggleClass("ps_on_BG");
+            var priceButtonToggle = function() {
+                $(".priceDisplay").toggle();
+                $(".priceSection").toggleClass("ps_off_BG");
+                $(".priceSection").toggleClass("ps_on_BG");
+            }
+            if ($(".priceSection").hasClass('ps_off_BG')) {
+                $(".PriceButton")[0].innerText = "Hide Prices";
+                priceButtonToggle();
+            } else {
+                $(".PriceButton")[0].innerText = "Show Prices";
+                priceButtonToggle();
+            };
         });
-
-        if ($(".priceSection").hasClass('ps_on_BG')) {
-            $(".priceDisplay").toggle();
-        }
-
 
 
         //Handling sorting box
-        //involves:
-        //$("select").change(function() {
-        //     var selectedSorting = ($(this).val());
-        //     console.log(selectedSorting);
-        // });
+
+        $("select").change(function() {
+            var selectedSorting = ($("select").val());
+            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
+            var sort_on = self.sort_on;
+            if (selectedSorting === '$ascend') {
+                sort_on = "price";
+                sort_order = "up";
+            } else if (selectedSorting === '$descend') {
+                sort_on = "price";
+                sort_order = "down";
+            } else if (selectedSorting === 'newest') {
+                sort_on = "created";
+                sort_order = "down";
+            } else if (selectedSorting === 'oldest') {
+                sort_on = "created";
+                sort_order = "up";
+            };
+            self.sort_on = sort_on;
+            self.sort_order = sort_order;
+            console.log(self.sort_on, self.sort_order);
+            self.showListings('', '', 100000, '');
+        });
     };
 
     var Affluentsy = new EtsyClient;

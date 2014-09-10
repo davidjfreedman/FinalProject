@@ -2,12 +2,12 @@
 	<div class="Listing" style="background-image: url(<%= MainImage.url_fullxfull %>)">
       <div class="clickSurface" id="<%= listing_id%>"></div>
       <div class="saleBanner">Sale Item</div>
-   		<span title="<%= title %>"><div class="listingInfoInside">
+   		<span title="<%= title %>"><div class="listingInfoInside" title="<%= title %>">
        		<h5><%= short_title %></h5>
         	<h6 class="priceDisplay">Only $<%= price %>!</h6>
     	</div></span>
 	</div>
-	<span title="<%= title %>"><div class="listingInfoOutside">
+	<span title="<%= title %>"><div class="listingInfoOutside" title="<%= title %>">
         <h6><%= short_title %></h6>
         <h6>Only $<%= price %>!</h6>
 	</div></span>

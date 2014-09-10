@@ -451,7 +451,7 @@ body > * {
     text-align: center;
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
-    transform: rotate(375deg);
+    transform: rotate(45deg);
     width: 80%;
 }
 .listingInfoInside {
@@ -978,7 +978,7 @@ body > * {
 .closeButton:hover {
     background-color: rgb(184, 176, 165);
     color: rgb(139, 125, 125);
-    transform: rotate(45deg);
+    transform: rotate(375deg);
     transform-origin: center;
     transition: 0.2s linear;
 }
