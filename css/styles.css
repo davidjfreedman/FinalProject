@@ -145,29 +145,54 @@ body > * {
     margin: 0 auto;
     z-index: 2;
     position: relative;
-    min-height: 2em;
+    box-shadow: 0px 1px 6px black;
+    cursor: default;
+}
+.menuButton.active {
+    color: rgb(235, 210, 180);
+    background-color: rgb(54, 47, 37);
 }
 .menuDroppedDown {
     display: block;
     position: absolute;
     top: 60%;
-    left: -70%;
-    border-radius: 10px;
+    left: -56;
+    border-radius: 15px;
     border: 1px solid rgb(185, 170, 151);
-    background-color: rgb(41, 35, 26);
+    background-color: rgb(51, 42, 30);
     z-index: 1;
     list-style-type: none;
     text-shadow: 0px 1px 2px black;
+    max-height: 0;
+    opacity: 0;
+    transition: 0.3s linear;
+}
+.menuDroppedDown.active {
+    max-height: 200px;
+    opacity: 1;
+    box-shadow: 0px 3px 7px black;
+    transition: 0.2s linear;
+}
+.menuDroppedDown.active li {
+    opacity: 1;
+    pointer-events: auto;
+    transition: 0.35s linear;
 }
 .menuDroppedDown ul {
-    padding: 0.6em 1em 0;
+    padding: 1em 1em 0;
 }
 .menuDroppedDown li {
-    margin-bottom: 0.3em;
+    opacity: 0;
+    margin-bottom: 1em;
     border-radius: 10px;
     border: 1px solid rgb(185, 170, 151);
+    color: rgb(236, 213, 184);
+    background-color: rgb(107, 89, 63);
+    padding: 0 0.5em;
     list-style-type: none;
-    text-indent: 0
+    text-indent: 0;
+    pointer-events: none;
+    cursor: pointer;
 }
 .navBar {
     display: none;
@@ -426,7 +451,7 @@ body > * {
     text-align: center;
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
-    transform: rotate(45deg);
+    transform: rotate(375deg);
     width: 80%;
 }
 .listingInfoInside {
@@ -922,12 +947,24 @@ body > * {
 
 /* ---------------------------- */
 
-.closeButton {
+.hoverCover {
     display: block;
     position: fixed;
-    top: 2.5%;
-    left: 85%;
-    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -51%);
+    width: 70%;
+    min-width: 315px;
+    height: 95vh;
+    z-index: 4;
+    pointer-events: none;
+    padding: 0.5em;
+}
+.closeButton {
+    display: block;
+    position: absolute;
+    top: -7;
+    right: -13;
     border-radius: 12px;
     z-index: 5;
     background-color: rgb(87, 78, 66);
@@ -935,11 +972,15 @@ body > * {
     padding: 2px;
     text-indent: 1;
     border: 2px solid rgb(146, 140, 120);
+    pointer-events: auto;
+    transition: 0.2s linear;
 }
 .closeButton:hover {
     background-color: rgb(184, 176, 165);
     color: rgb(139, 125, 125);
-    animation: 5s linear;
+    transform: rotate(45deg);
+    transform-origin: center;
+    transition: 0.2s linear;
 }
 .shareItem {
     display: none;
@@ -1029,11 +1070,14 @@ a img {
         display: block;
     }
     .closeButton {
-        left: 92%;
+        right: -13%;
     }
 }
 @media (min-width: 1030px) {
     .sellerBox img {
         min-width: 85px;
+    }
+    .closeButton {
+        right: -12%;
     }
 }

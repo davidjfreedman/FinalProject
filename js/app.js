@@ -228,7 +228,12 @@ function app() {
 
     EtsyClient.prototype.handleClickEvents = function() {
 
-
+        var menuButtonClickTest = function() {
+            if ($(".menuButton").hasClass('active')) {
+                $(".menuButton").toggleClass('active');
+                $(".menuDroppedDown").toggleClass('active');
+            };
+        };
 
         //  Opening the modal
         var self = this;
@@ -260,6 +265,7 @@ function app() {
                 console.log("already displaying clearance")
                 return;
             } else {
+                menuButtonClickTest();
                 self.showClearance();
                 setTimeout(function() {
                     //the following line is useful for showing timing of display:
@@ -278,22 +284,26 @@ function app() {
 
         //  Gallery Click
         $('body').on('click', '.gallery', function() {
-            // first checks to see if Listings are shown, and if they're the clearance section
+            // first checks if the user clicked on the drop down button
+            console.log((!!($(".menuButton").hasClass("active"))));
+
+            // first checks to see if Listings are shown, and if they're in the clearance section
             if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
                 $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
+                menuButtonClickTest();
                 self.showListings('', '', 100000, '');
             }
 
             // next checks if Listings are there and not in the clearance section
             else if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "none") {
                 //this section will eventually be changed when the categories are working
-                console.log("already displaying gallery")
+                console.log("already displaying gallery");
                 return;
             }
 
             // lastly, checks if Listings are not there
             else if ($(".ListingsDestination")[0].innerHTML === "") {
-                console.log('test');
+                menuButtonClickTest();
                 self.showListings('', '', 100000, '');
 
             }
@@ -345,6 +355,13 @@ function app() {
 
         });
 
+        //  Drop-Down Nav Menu
+        var menuButton = document.querySelector('.menuButton');
+        var droppedMenu = document.querySelector('.menuDroppedDown');
+        $('body').on('click', '.menuButton', function() {
+            $(menuButton).toggleClass('active');
+            $(droppedMenu).toggleClass('active');
+        });
 
         //  Search Queries - NavBar
         $('.navSearch').on('submit', function(e) {
