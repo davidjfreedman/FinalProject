@@ -101,7 +101,8 @@ body > * {
     min-height: 100px;
     color: rgb(185, 170, 151);
     font-size: 0;
-    padding-top: 2%;
+    padding-top: 5px;
+    max-height: 100px;
 }
 .mainHeader.active {
     position: fixed;
@@ -200,7 +201,7 @@ body > * {
     text-align: center;
     font-size: 1rem;
     vertical-align: top;
-    padding-top: 3%;
+    padding-top: 30px;
 }
 .navBar span {
     cursor: pointer;
@@ -231,7 +232,7 @@ body > * {
 .searchBar {
     vertical-align: middle;
     display: block;
-    padding-top: 5%;
+    padding-top: 10px;
     text-align: right;
     width: 95%;
     float: right;
@@ -381,6 +382,7 @@ body > * {
     min-height: 100vh;
     width: 100%;
     margin: 0 auto;
+    padding-top: 20px;
 }
 .contentBlock.active {
     padding-top: 120px;
@@ -469,8 +471,14 @@ body > * {
     font-weight: 100;
     text-shadow: 0px 1px 1px black;
 }
-.priceDisplay {
+.priceDisplayOff {
     display: none;
+    position: absolute;
+    bottom: 12;
+    right: 12;
+}
+.priceDisplayOn {
+    display: block;
     position: absolute;
     bottom: 12;
     right: 12;
@@ -517,6 +525,9 @@ body > * {
     }
     .topLinks {
         font-size: 0.8em;
+    }
+    .mainHeader {
+        padding-top: 13px;
     }
 }
 @media (min-width: 600px) and (max-width: 750px) {
@@ -631,9 +642,6 @@ body > * {
     .Listing {
         width: 32%;
     }
-    .navBar {
-        padding-top: 3%;
-    }
     .categoryCentering {
         width: 75%;
     }
@@ -737,6 +745,7 @@ body > * {
     width: 100%;
     height: 100%;
     box-shadow: inset 0 0 10px #000000;
+    pointer-events: none;
 }
 .imageDiv {
     display: block;

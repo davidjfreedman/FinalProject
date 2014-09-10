@@ -36,6 +36,10 @@ function app() {
         this.offset = 0;
         this.sort_on = 'created';
         this.sort_order = 'down';
+        this.query = '';
+        this.category = '';
+        this.minPrice = '';
+        this.maxPrice = '';
         this.num_listings = 20;
         this.spinnerTemplate = '<div class="spinnerDiv"><img src="./images/spinner.gif"></div>';
 
@@ -85,8 +89,11 @@ function app() {
             this.getListings(query, category, pricemin, pricemax)
         ).then(function(template, listings) {
             console.log(listings[0]);
-            results_amount = listings[0].count;
-            search_results = listings[0].results;
+            if (query === '' && category === '' && pricemin === 100000 && pricemax === '') {
+                normal_results_amount = listings[0].count;
+            };
+            var results_amount = listings[0].count;
+            var search_results = listings[0].results;
             search_results = _.filter(search_results, function(listing) {
                 return (listing.state === "active");
             })
@@ -94,6 +101,11 @@ function app() {
             // console.log(oneListing.state)
             search_results.forEach(
                 function(oneListing) {
+                    if ($(".priceSection").hasClass('ps_off_BG')) {
+                        oneListing.pButtonState = ('priceDisplayOff');
+                    } else {
+                        oneListing.pButtonState = ('priceDisplayOn');
+                    };
                     if (oneListing.title.length >= 30) {
                         oneListing.short_title = (oneListing.title.substring(0, 30)) + '...';
                     } else if (oneListing.title.length < 30) {
@@ -184,13 +196,13 @@ function app() {
     EtsyClient.prototype.showRandomListing = function() {
         var self = this;
         var p = $.Deferred();
-        if (typeof results_amount === 'undefined') {
+        if (typeof normal_results_amount === 'undefined') {
             alert('Please wait for the page to fully load.')
         };
-        var randomOffset = Math.floor(Math.random() * (results_amount - this.num_listings));
+        var randomOffset = Math.floor(Math.random() * (normal_results_amount - this.num_listings));
         var randomListingNumber = Math.floor(Math.random() * this.num_listings);
         var uriForRandomJSON = this.etsy_url + this.version + "listings/active" + ".js?limit=" + this.num_listings + "&min_price=100000&offset=" + randomOffset + "&includes=Images&api_key=" + this.api_key + "&callback=?";
-        console.log(randomOffset + " out of " + results_amount);
+        console.log(randomOffset + " out of " + normal_results_amount);
         // $('.ListingsDestination')[0].innerHTML = '';
 
         $.when(
@@ -224,7 +236,7 @@ function app() {
 
     EtsyClient.prototype.showClearance = function() {
         $('.ListingsDestination')[0].innerHTML = this.spinnerTemplate;
-        this.showListings('', '', 10000, 10000);
+        this.showListings('', '', 10000, 100000);
 
     }
 
@@ -307,8 +319,6 @@ function app() {
                 self.showListings('', '', 100000, '');
 
             }
-
-
         });
 
 
@@ -334,25 +344,31 @@ function app() {
         //  Category click
 
         $('.categories').on('click', 'li', function() {
-            var category = $(this).attr('id');
-            var query = '';
-            var min_price = 100000;
-            if (category === 'men') {
-                var category = 'clothing';
-                var query = 'mens';
-                var min_price = 1000;
-            } else if (category === 'women') {
-                var category = 'clothing';
-                var query = 'dress';
-                var min_price = 10000;
-            } else if (category === 'kids') {
-                var category = 'clothing';
-                var query = 'children';
-                var min_price = 1000;
+            self.category = $(this).attr('id');
+            self.query = '';
+            self.minPrice = 100000;
+            _query = self.query;
+            _category = self.category;
+            _minPrice = self.minPrice;
+            self.maxPrice = '';
+            if (_category === 'men') {
+                _category = 'clothing';
+                _query = 'mens';
+                _minPrice = 1000;
+            } else if (_category === 'women') {
+                _category = 'clothing';
+                _query = 'dress';
+                _minPrice = 10000;
+            } else if (_category === 'kids') {
+                _category = 'clothing';
+                _query = 'children';
+                _minPrice = 1000;
             };
+            self.query = _query;
+            self.category = _category;
+            self.minPrice = _minPrice;
             $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
-            self.showListings(query, category, min_price, '');
-
+            self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
         });
 
         //  Drop-Down Nav Menu
@@ -366,6 +382,10 @@ function app() {
         //  Search Queries - NavBar
         $('.navSearch').on('submit', function(e) {
             e.preventDefault();
+            //if we add search inside category/clearance, simply do an if check on whether the box is checked, and incorporate the following changes into the else statement:
+            self.category = '';
+            self.minPrice = 10000;
+            self.maxPrice = '';
             var searchQuery = ($(".sBox").val());
             // error-throwing for improper searches
             if (searchQuery === '' || searchQuery === '?' || searchQuery === '#') {
@@ -373,7 +393,9 @@ function app() {
                 return
             };
             $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
-            self.showListings(searchQuery, '', 10000, '');
+            self.query = searchQuery;
+            // self.showListings(searchQuery, '', 10000, '');
+            self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
             if ($(".priceSection").hasClass('ps_on_BG')) {
                 console.log('test');
                 $(".priceDisplay").toggle();
@@ -384,6 +406,10 @@ function app() {
         //  Search Queries - Splash Page
         $('.topSearch').on('submit', function(e) {
             e.preventDefault();
+            //if we add search inside category/clearance, simply do an if check on whether the box is checked, and incorporate the following changes into the else statement:
+            self.category = '';
+            self.minPrice = 10000;
+            self.maxPrice = '';
             var searchQuery = ($(".topSBox").val());
             // error-throwing for improper searches
             if (searchQuery === '' || searchQuery === '?' || searchQuery === '#') {
@@ -394,8 +420,9 @@ function app() {
                 scrollTop: $(".mainHeader").offset().top
             }, 700);
             $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
-            self.showListings(searchQuery, '', 10000, '');
-            //3. test for errors using different search queries
+            self.query = searchQuery;
+            // self.showListings(searchQuery, '', 10000, '');
+            self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
         });
 
         //  Handling images left
@@ -406,8 +433,6 @@ function app() {
                 currentImage = listingImages.length - 1;
             }
             $('.itemImages')[0].innerHTML = '<img src="' + listingImages[currentImage] + '">';
-
-
         });
 
         //  Handling images right
@@ -423,16 +448,19 @@ function app() {
         //  Displaying/Hiding prices
         $('body').on('click', '.priceButton', function() {
             var priceButtonToggle = function() {
-                $(".priceDisplay").toggle();
                 $(".priceSection").toggleClass("ps_off_BG");
                 $(".priceSection").toggleClass("ps_on_BG");
             }
             if ($(".priceSection").hasClass('ps_off_BG')) {
                 $(".PriceButton")[0].innerText = "Hide Prices";
+                $(".priceDiv").removeClass('priceDisplayOff');
+                $(".priceDiv").addClass('priceDisplayOn');
                 priceButtonToggle();
             } else {
                 $(".PriceButton")[0].innerText = "Show Prices";
                 priceButtonToggle();
+                $(".priceDiv").removeClass('priceDisplayOn');
+                $(".priceDiv").addClass('priceDisplayOff');
             };
         });
 
@@ -459,7 +487,8 @@ function app() {
             self.sort_on = sort_on;
             self.sort_order = sort_order;
             console.log(self.sort_on, self.sort_order);
-            self.showListings('', '', 100000, '');
+            // self.showListings('', '', 100000, '');
+            self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
         });
     };
 
