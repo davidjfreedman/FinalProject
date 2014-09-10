@@ -44,19 +44,25 @@ function app() {
     //      (or lack thereof)    //
     //===========================//
 
-    EtsyClient.prototype.getListings = function(query, pricemin, pricemax) {
+    EtsyClient.prototype.getListings = function(query, category, pricemin, pricemax) {
 
         var model = 'listings/';
         var filter = 'active';
         var self = this;
-        if (!pricemax) {
-            var complete_api_URL = (this.etsy_url + this.version + model + filter + ".js?limit=" + this.num_listings + "&min_price=" + pricemin + "&offset=" + this.offset + "&includes=MainImage&api_key=" + this.api_key + "&callback=?");
-        } else {
-            var complete_api_URL = (this.etsy_url + this.version + model + filter + ".js?limit=" + this.num_listings + "&min_price=" + pricemin + "&max_price=" + pricemax + "&offset=" + this.offset + "&includes=MainImage&api_key=" + this.api_key + "&callback=?");
+        var complete_api_URL = this.etsy_url + this.version + model + filter + ".js?limit=" + this.num_listings + "&min_price=" + pricemin + "&offset=" + this.offset + "&includes=MainImage";
+        var mainURLEnd = "&api_key=" + this.api_key + "&callback=?";
+        if (!!category) {
+            var complete_api_URL = complete_api_URL + "&category=" + category;
         };
-        if (!query) {
-            return $.getJSON(complete_api_URL);
-        }
+        if (!!pricemax) {
+            var complete_api_URL = complete_api_URL + "&max_price=" + pricemax;
+        };
+        if (!!query) {
+            var complete_api_URL = complete_api_URL + "&keywords=" + query;
+        };
+        var complete_api_URL = complete_api_URL + mainURLEnd;
+        console.log(complete_api_URL);
+        return $.getJSON(complete_api_URL);
     }
 
     // elses (if string, if number, multistring, errors)
@@ -69,13 +75,13 @@ function app() {
         });
     };
 
-    EtsyClient.prototype.showListings = function(query, pricemin, pricemax) {
+    EtsyClient.prototype.showListings = function(query, category, pricemin, pricemax) {
         var self = this;
         var all_Listings = '';
         $.when(
             this.templateResults(
                 '../templates/ListingsResult.tmpl'),
-            this.getListings(query, pricemin, pricemax)
+            this.getListings(query, category, pricemin, pricemax)
         ).then(function(template, listings) {
             console.log(listings[0]);
             results_amount = listings[0].count;
@@ -97,7 +103,11 @@ function app() {
                 });
             $('.listingsNav').fadeIn(400);
             $('.ListingsDestination')[0].innerHTML = all_Listings;
-            $('.results')[0].innerText = 'Viewing ' + (self.offset + 25) + ' results out of ' + results_amount;
+            if (results_amount === 0) {
+                $('.results')[0].innerHTML = '<p>No results found for "' + query + '".<br>Please try another search.</p>';
+            } else {
+                $('.results')[0].innerText = 'Viewing ' + (self.offset + search_results.length) + ' results out of ' + results_amount;
+            };
             $('.contentBlock').fadeIn(800);
 
         })
@@ -106,6 +116,7 @@ function app() {
     EtsyClient.prototype.getListingInfo = function(id) {
         //this is run when the user clicks on one of the listings. The listings change the PATH, which triggers the js to run this function with the id provided by the link (put in by showlistings)
         var model = 'listings';
+        console.log(this.etsy_url + this.version + model + '/' + id + ".js?&includes=Images&api_key=" + this.api_key + "&callback=?");
         return $.getJSON(this.etsy_url + this.version + model + '/' + id + ".js?&includes=Images&api_key=" + this.api_key + "&callback=?");
     }
 
@@ -217,7 +228,7 @@ function app() {
 
     EtsyClient.prototype.showClearance = function() {
         $('.ListingsDestination')[0].innerHTML = '';
-        this.showListings('', 10000, 10000);
+        this.showListings('', '', 10000, 10000);
 
     }
 
@@ -252,7 +263,7 @@ function app() {
         //  Clearance Section Click
         $('body').on('click', '.clearance', function() {
             if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
-                console.log("already displaying gallery")
+                console.log("already displaying clearance")
                 return;
             } else {
                 self.showClearance();
@@ -276,7 +287,7 @@ function app() {
             // first checks to see if Listings are shown, and if they're the clearance section
             if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
                 $(".ListingsDestination")[0].innerHTML = "";
-                self.showListings('', 100000, '');
+                self.showListings('', '', 100000, '');
             }
 
             // next checks if Listings are there and not in the clearance section
@@ -289,7 +300,7 @@ function app() {
             // lastly, checks if Listings are not there
             else if ($(".ListingsDestination")[0].innerHTML === "") {
                 console.log('test');
-                self.showListings('', 100000, '');
+                self.showListings('', '', 100000, '');
 
             }
 
@@ -314,6 +325,55 @@ function app() {
                 self.showRandomListing();
             }
         });
+
+        //  Category click
+
+        $('.categories').on('click', 'li', function() {
+            var category = $(this).attr('id');
+            var query = '';
+            var min_price = 100000;
+            if (category === 'men') {
+                var category = 'clothing';
+                var query = 'mens';
+                var min_price = 1000;
+            } else if (category === 'women') {
+                var category = 'clothing';
+                var query = 'dress';
+                var min_price = 10000;
+            } else if (category === 'kids') {
+                var category = 'clothing';
+                var query = 'children';
+                var min_price = 1000;
+            };
+            $('.ListingsDestination')[0].innerHTML = '';
+            self.showListings(query, category, min_price, '');
+
+        });
+        // 1. on click of li in sidebar
+        // 3. clear out the content box
+        // 4. showlistings using
+
+        //  Search Queries
+
+        $('.searchBox').on('submit', function(e) {
+            e.preventDefault();
+            var searchQuery = ($(".sBox").val());
+            // error-throwing for improper searches
+            if (searchQuery === '' || searchQuery === '?' || searchQuery === '#') {
+                console.log('please input a proper search query');
+                return
+            };
+            //1.5. if from topsearch class, scroll page to results
+            // if ($(this).hasClass(".topSearch")) {
+            //     console.log('true');
+            // };
+
+            //2. implement a new search using that value that doesn't refresh the page
+            $('.ListingsDestination')[0].innerHTML = '';
+            self.showListings(searchQuery, '', 10000, '');
+            //3. test for errors using different search queries
+        });
+
 
         //  Handling images left
         $('body').delegate('.imageDivLeft', 'click', function() {
@@ -354,9 +414,10 @@ function app() {
     }
 
     var Affluentsy = new EtsyClient;
-    Affluentsy.showListings('', 100000, '');
+    Affluentsy.showListings('', '', 100000, '');
     Affluentsy.handleClickEvents();
     console.log(($("saleBanner").css("display")));
+    alert("Certain functions are not currently in place, but will be implemented over the next few days. Please view the readme on Github for more info.");
 }
 
 //need routing prototype
