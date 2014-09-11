@@ -10,10 +10,12 @@ function app() {
             $('.mainheader').addClass('active');
             // $(sidebar).addClass('active');
             $('.contentBlock').addClass('active');
+            $('.aboutUs').addClass('active');
         } else {
             $('.mainheader').removeClass('active');
             // $(sidebar).removeClass('active');
             $('.contentBlock').removeClass('active');
+            $('.aboutUs').removeClass('active');
         }
         if (window.scrollY >= $('.verticalPusher')[0].offsetHeight + 50) {
             $('.scrollToTop').addClass('active');
@@ -37,7 +39,7 @@ function app() {
         this.sort_order = 'down';
         this.query = '';
         this.category = '';
-        this.minPrice = '';
+        this.minPrice = 100000;
         this.maxPrice = '';
         this.num_listings = 20;
         this.spinnerTemplate = '<div class="spinnerDiv"><img src="./images/spinner.gif"></div>';
@@ -503,10 +505,29 @@ function app() {
             };
         });
 
+        //  About Us page
+
+        // $('body').on('click', '.aboutLink', function() {
+        //     self.scrollToTop();
+        //     $('.aboutUs').removeClass('aboutUsOff');
+        //     $('body').addClass('noScroll');
+
+        // });
+        // $('.gallery, .clearance, .random, .sButton, #men, #women, #kids, #art, #jewelry, #furniture, #vintage, #weddings').on('click', function() {
+        //     $('.aboutUs').addClass('aboutUsOff');
+        //     $('body').removeClass('noScroll');
+        // });
+
+        //1. on click, display about page, scroll to top
+        //2. on click on any other button, turn off about page
+        //3. while about page on, disable scroll
 
         //Handling sorting box
 
         $("select").change(function() {
+            if ($('.saleBannerLocation').hasClass('saleBannerOn')) {
+                var goToClearance = true;
+            };
             var selectedSorting = ($("select").val());
             self.scrollToTop();
             self.addSpinner();
@@ -528,13 +549,24 @@ function app() {
             self.sort_order = sort_order;
             console.log(self.sort_on, self.sort_order);
             // self.showListings('', '', 100000, '');
-            self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
+            if (!!(goToClearance)) {
+                $(".clearance").addClass('active');
+                self.showListings('', '', 10000, 100000);
+            } else {
+                self.showListings(self.query, self.category, self.minPrice, self.maxPrice);
+            };
         });
     };
 
     var Affluentsy = new EtsyClient;
     Affluentsy.showListings('', '', 100000, '');
     Affluentsy.handleClickEvents();
+    // if ($('.aboutUs').hasClass('alwaysOn')) {
+    //     var scrollToHere = $('.verticalPusher').height();
+    //     $("html, body").animate({
+    //         scrollTop: scrollToHere
+    //     }, 1000);
+    // };
 }
 
 //need routing prototype
