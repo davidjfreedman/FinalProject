@@ -443,8 +443,8 @@ body > * {
     left: 0;
     z-index: 1;
 }
-.saleBanner {
-    display: none;
+.saleBannerOn {
+    display: block;
     position: absolute;
     top: 30;
     right: -43;
@@ -455,6 +455,9 @@ body > * {
     filter: grayscale(0%);
     transform: rotate(45deg);
     width: 80%;
+}
+.saleBannerOff {
+    display: none;
 }
 .listingInfoInside {
     display: none;
@@ -518,6 +521,7 @@ body > * {
     border-bottom: 1px;
     font-size: 1.1em;
     transition: 0.2s linear;
+    cursor: default;
 }
 .scrollToTop.active {
     transform: skew(-15deg) translateX(0);
@@ -635,7 +639,7 @@ body > * {
     .priceButton {
         width: 85%;
     }
-    .saleBanner {
+    .saleBannerOn {
         right: -65;
     }
 }
@@ -689,14 +693,14 @@ body > * {
     .priceButton {
         width: 75%;
     }
-    .saleBanner {
+    .saleBannerOn {
         top: 45;
         right: -63;
         width: 100%;
     }
 }
 @media (min-width: 1300px) {
-    .saleBanner {
+    .saleBannerOn {
         right: -80;
     }
 }

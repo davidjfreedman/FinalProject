@@ -5,23 +5,16 @@ function app() {
     //        on scroll          //
     //===========================//
 
-    var header = document.querySelector('.mainHeader');
-    // var sidebar = document.querySelector('.sideBar');
-    var content = document.querySelector('.contentBlock')
-    var pusher = document.querySelector('.verticalPusher');
-    var backToTop = document.querySelector('.backToTop');
-
-
     $(window).on('scroll', function() {
-        if (window.scrollY >= pusher.offsetHeight) {
-            $(header).addClass('active');
+        if (window.scrollY >= $('.verticalPusher')[0].offsetHeight) {
+            $('.mainheader').addClass('active');
             // $(sidebar).addClass('active');
-            $(content).addClass('active');
+            $('.contentBlock').addClass('active');
             $('.scrollToTop').addClass('active');
         } else {
-            $(header).removeClass('active');
+            $('.mainheader').removeClass('active');
             // $(sidebar).removeClass('active');
-            $(content).removeClass('active');
+            $('.contentBlock').removeClass('active');
             $('.scrollToTop').removeClass('active');
         }
     });
@@ -46,6 +39,23 @@ function app() {
         this.num_listings = 20;
         this.spinnerTemplate = '<div class="spinnerDiv"><img src="./images/spinner.gif"></div>';
 
+    }
+
+    //===========================//
+    //       Getting it to       //
+    //      scroll to the top    //
+    //   of the listing results  //
+    //===========================//
+
+    EtsyClient.prototype.scrollToTop = function() {
+        var scrollToHere = $('.verticalPusher').height();
+        $("html, body").animate({
+            scrollTop: scrollToHere
+        }, 625);
+    }
+
+    EtsyClient.prototype.addSpinner = function() {
+        $('.ListingsDestination')[0].innerHTML = '<div class="spinnerDiv"><img src="./images/spinner.gif"></div>';
     }
 
     //===========================//
@@ -104,11 +114,20 @@ function app() {
             // console.log(oneListing.state)
             search_results.forEach(
                 function(oneListing) {
+                    //checking if we're in clearance section, and adding banner
+                    if ($(".clearance").hasClass('active')) {
+                        oneListing.sBannerState = ('saleBannerOn');
+                        $('.clearance').removeClass('active')
+                    } else {
+                        oneListing.sBannerState = ('saleBannerOff')
+                    };
+                    //checking if prices are supposed to be showing
                     if ($(".priceSection").hasClass('ps_off_BG')) {
                         oneListing.pButtonState = ('priceDisplayOff');
                     } else {
                         oneListing.pButtonState = ('priceDisplayOn');
                     };
+                    //checks length of listing title, shortens if necessary
                     if (oneListing.title.length >= 30) {
                         oneListing.short_title = (oneListing.title.substring(0, 30)) + '...';
                     } else if (oneListing.title.length < 30) {
@@ -125,7 +144,6 @@ function app() {
                 $('.results')[0].innerText = 'Viewing ' + (self.offset + search_results.length) + ' results out of ' + results_amount;
             };
             $('.contentBlock').fadeIn(800);
-
         })
     }
 
@@ -238,7 +256,9 @@ function app() {
     }
 
     EtsyClient.prototype.showClearance = function() {
-        $('.ListingsDestination')[0].innerHTML = this.spinnerTemplate;
+        this.scrollToTop();
+        this.addSpinner();
+        $(".clearance").addClass('active');
         this.showListings('', '', 10000, 100000);
 
     }
@@ -279,7 +299,8 @@ function app() {
         //  Clearance Section Click
         $('body').on('click', '.clearance', function() {
             menuButtonClickTest();
-            if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
+            console.log(!!($('saleBannerOff')));
+            if ($(".ListingsDestination") !== "" && (!($('saleBannerOn'))) == "block") {
                 console.log("already displaying clearance")
                 return;
             } else {
@@ -306,7 +327,8 @@ function app() {
             menuButtonClickTest();
             // first checks to see if Listings are shown, and if they're in the clearance section
             if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
-                $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
+                self.scrollToTop();
+                self.addSpinner();
                 self.showListings('', '', 100000, '');
             }
 
@@ -370,7 +392,8 @@ function app() {
             self.query = _query;
             self.category = _category;
             self.minPrice = _minPrice;
-            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
+            self.scrollToTop();
+            self.addSpinner();
             self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
         });
 
@@ -389,7 +412,12 @@ function app() {
         });
 
         //  Scroll to Top button click
-        // insert the magic here!
+        $('body').on('click', '.scrollToTop', (function() {
+            var scrollToHere = $('.verticalPusher').height();
+            $("html, body").animate({
+                scrollTop: scrollToHere
+            }, 750);
+        }));
 
         //  Search Queries - NavBar
         $('.navSearch').on('submit', function(e) {
@@ -404,7 +432,8 @@ function app() {
                 console.log('please input a proper search query');
                 return
             };
-            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
+            self.scrollToTop();
+            self.addSpinner();
             self.query = searchQuery;
             // self.showListings(searchQuery, '', 10000, '');
             self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
@@ -428,10 +457,8 @@ function app() {
                 console.log('please input a proper search query');
                 return
             };
-            $('html, body').animate({
-                scrollTop: $(".mainHeader").offset().top
-            }, 700);
-            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
+            self.scrollToTop();
+            self.addSpinner();
             self.query = searchQuery;
             // self.showListings(searchQuery, '', 10000, '');
             self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
@@ -481,7 +508,8 @@ function app() {
 
         $("select").change(function() {
             var selectedSorting = ($("select").val());
-            $('.ListingsDestination')[0].innerHTML = self.spinnerTemplate;
+            self.scrollToTop();
+            self.addSpinner();
             var sort_on = self.sort_on;
             if (selectedSorting === '$ascend') {
                 sort_on = "price";
