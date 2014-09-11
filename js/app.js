@@ -10,11 +10,14 @@ function app() {
             $('.mainheader').addClass('active');
             // $(sidebar).addClass('active');
             $('.contentBlock').addClass('active');
-            $('.scrollToTop').addClass('active');
         } else {
             $('.mainheader').removeClass('active');
             // $(sidebar).removeClass('active');
             $('.contentBlock').removeClass('active');
+        }
+        if (window.scrollY >= $('.verticalPusher')[0].offsetHeight + 50) {
+            $('.scrollToTop').addClass('active');
+        } else {
             $('.scrollToTop').removeClass('active');
         }
     });
@@ -216,6 +219,7 @@ function app() {
 
     EtsyClient.prototype.showRandomListing = function() {
         var self = this;
+        $('.randomSpinnerSegment').addClass('active');
         var p = $.Deferred();
         if (typeof normal_results_amount === 'undefined') {
             alert('Please wait for the page to fully load.')
@@ -251,6 +255,7 @@ function app() {
             $('.itemImages')[0].innerHTML = '<img src="' + listingImages[0] + '">';
             self.showUserInfo(randomListing.user_id);
             p.resolve();
+            $('.randomSpinnerSegment').removeClass('active');
         });
         return p;
     }
@@ -275,25 +280,35 @@ function app() {
         //  Opening the modal
         var self = this;
         $('body').on('click', '.clickSurface', function() {
-            // $.when(
-            //     this.showListingInfo())
             var targetID = event.target.id;
             $.when(
                 self.showListingInfo(targetID)
             ).then(function() {
                 $('body').toggleClass('noScroll');
-                $('#hoverListing').toggleClass('listingBox');
+                $('#individualListing').toggleClass('individualListingOff');
             });
         });
 
+        //  Disclaimer click
+        $('body').on('click', '.disclaimerButton', function() {
+            $('.disclaimer').toggleClass('active');
+            if ($('.disclaimer').hasClass('active')) {
+                console.log('up', $('.disclaimerButton')[0].innerHTML);
+                $('.disclaimerButton')[0].innerHTML = '<i class="fa fa-caret-down"></i>';
+            } else {
+                console.log('down');
+                $('.disclaimerButton')[0].innerHTML = '<i class="fa fa-caret-up"></i>';
+            }
+        });
+
         //  Closing the modal
-        $('body').on('click', '.mask', function() {
+        $('body').on('click', '#listingMask', function() {
             $('body').toggleClass('noScroll');
-            $('#hoverListing').toggleClass('listingBox');
+            $('#individualListing').toggleClass('individualListingOff');
         });
         $('body').on('click', '.closeButton', function() {
             $('body').toggleClass('noScroll');
-            $('#hoverListing').toggleClass('listingBox');
+            $('#individualListing').toggleClass('individualListingOff');
         });
 
         //  Clearance Section Click
@@ -338,20 +353,12 @@ function app() {
 
         //  Random Listing Click
         $('body').on('click', '.random', function() {
-            //if listingBox is present, the modal is not on; show the modal and run the function.
-            if ($("#hoverListing").hasClass('listingBox')) {
-                $.when(
-                    self.showRandomListing()
-                ).then(function() {
-                    $('body').toggleClass('noScroll');
-                    $('#hoverListing').toggleClass('listingBox');
-                });
-            }
-
-            //if listingBox is not present, the modal is on; run the function only.
-            else {
-                self.showRandomListing();
-            }
+            $.when(
+                self.showRandomListing()
+            ).then(function() {
+                $('body').toggleClass('noScroll');
+                $('#individualListing').toggleClass('individualListingOff');
+            });
         });
 
 
