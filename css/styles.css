@@ -166,13 +166,13 @@ body > * {
     text-shadow: 0px 1px 2px black;
     max-height: 0;
     opacity: 0;
-    transition: 0.3s linear;
+    transition: 0.2s linear;
 }
 .menuDroppedDown.active {
-    max-height: 200px;
+    max-height: 235px;
     opacity: 1;
     box-shadow: 0px 3px 7px black;
-    transition: 0.2s linear;
+    transition: 0.1s linear;
 }
 .menuDroppedDown.active li {
     opacity: 1;
@@ -476,9 +476,6 @@ body > * {
 }
 .priceDisplayOff {
     display: none;
-    position: absolute;
-    bottom: 12;
-    right: 12;
 }
 .priceDisplayOn {
     display: block;
@@ -494,6 +491,13 @@ body > * {
     margin-top: 0.5em;
     text-align: right;
     font-size: 0.68em;
+}
+.priceOuterDisplayOff {
+    display: none;
+}
+.priceOuterDisplayOn {
+    display: block;
+    position: absolute;
 }
 .listingInfoOutside {
     display: inline-block;
@@ -620,7 +624,7 @@ body > * {
         padding-left: 20%;
     }
     .priceButton {
-        width: 100%;
+        width: 95%;
         font-size: 0.8em;
     }
 }

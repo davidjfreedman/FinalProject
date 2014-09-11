@@ -126,8 +126,10 @@ function app() {
                     //checking if prices are supposed to be showing
                     if ($(".priceSection").hasClass('ps_off_BG')) {
                         oneListing.pButtonState = ('priceDisplayOff');
+                        oneListing.pButtonOutsideState = ('priceOuterDisplayOff');
                     } else {
                         oneListing.pButtonState = ('priceDisplayOn');
+                        oneListing.pButtonOutsideState = ('priceOuterDisplayOn');
                     };
                     //checks length of listing title, shortens if necessary
                     if (oneListing.title.length >= 30) {
@@ -432,11 +434,7 @@ function app() {
             self.addSpinner();
             self.query = searchQuery;
             // self.showListings(searchQuery, '', 10000, '');
-            self.showListings(self.query, self.category, self.minPrice, self.maxPrice)
-            if ($(".priceSection").hasClass('ps_on_BG')) {
-                console.log('test');
-                $(".priceDisplay").toggle();
-            }
+            self.showListings(self.query, self.category, self.minPrice, self.maxPrice);
         });
 
 
@@ -485,17 +483,23 @@ function app() {
             var priceButtonToggle = function() {
                 $(".priceSection").toggleClass("ps_off_BG");
                 $(".priceSection").toggleClass("ps_on_BG");
-            }
+            };
             if ($(".priceSection").hasClass('ps_off_BG')) {
-                $(".PriceButton")[0].innerText = "Hide Prices";
-                $(".priceDiv").removeClass('priceDisplayOff');
-                $(".priceDiv").addClass('priceDisplayOn');
+                $(".priceButton")[0].innerText = "Hide Prices";
+                $(".priceButton")[1].innerText = "Hide Prices";
+                $(".innerPriceDiv").removeClass('priceDisplayOff');
+                $(".innerPriceDiv").addClass('priceDisplayOn');
+                $(".outerPriceDiv").removeClass('priceOuterDisplayOff');
+                $(".outerPriceDiv").addClass('priceOuterDisplayOn');
                 priceButtonToggle();
             } else {
-                $(".PriceButton")[0].innerText = "Show Prices";
+                $(".priceButton")[0].innerText = "Show Prices";
+                $(".priceButton")[1].innerText = "Show Prices";
                 priceButtonToggle();
-                $(".priceDiv").removeClass('priceDisplayOn');
-                $(".priceDiv").addClass('priceDisplayOff');
+                $(".innerPriceDiv").removeClass('priceDisplayOn');
+                $(".innerPriceDiv").addClass('priceDisplayOff');
+                $(".outerPriceDiv").removeClass('priceOuterDisplayOn');
+                $(".outerPriceDiv").addClass('priceOuterDisplayOff');
             };
         });
 
