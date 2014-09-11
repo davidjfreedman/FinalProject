@@ -1,7 +1,7 @@
 <!-- <a href = "#/listing/<%=listing_id%>"> -->
 	<div class="Listing" style="background-image: url(<%= MainImage.url_fullxfull %>)">
       <div class="clickSurface" id="<%= listing_id%>" title="<%= title %>"></div>
-      <div class="<%= sBannerState %>">Sale Item</div>
+      <div class="saleBannerLocation <%= sBannerState %>">Sale Item</div>
    		<span title="<%= title %>"><div class="listingInfoInside">
        		<h5><%= short_title %></h5>
         	<h6 class="<%= pButtonState %> priceDiv">Only $<%= price %>!</h6>

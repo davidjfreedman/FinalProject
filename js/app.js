@@ -117,7 +117,6 @@ function app() {
                     //checking if we're in clearance section, and adding banner
                     if ($(".clearance").hasClass('active')) {
                         oneListing.sBannerState = ('saleBannerOn');
-                        $('.clearance').removeClass('active')
                     } else {
                         oneListing.sBannerState = ('saleBannerOff')
                     };
@@ -136,6 +135,7 @@ function app() {
                     var filledHTML = template(oneListing);
                     all_Listings += filledHTML;
                 });
+            $('.clearance').removeClass('active')
             $('.listingsNav').fadeIn(400);
             $('.ListingsDestination')[0].innerHTML = all_Listings;
             if (results_amount === 0) {
@@ -299,23 +299,12 @@ function app() {
         //  Clearance Section Click
         $('body').on('click', '.clearance', function() {
             menuButtonClickTest();
-            console.log(!!($('saleBannerOff')));
-            if ($(".ListingsDestination") !== "" && (!($('saleBannerOn'))) == "block") {
+            if ($(".ListingsDestination") !== "" && $('.saleBannerLocation').hasClass('saleBannerOn')) {
+                self.scrollToTop();
                 console.log("already displaying clearance")
                 return;
             } else {
                 self.showClearance();
-                setTimeout(function() {
-                    //the following line is useful for showing timing of display:
-                    // console.log($(".saleBanner").css('display'), ($(".saleBanner").css('display') == "none"));
-                    if ($(".saleBanner").css('display') == "none") {
-                        $(".saleBanner").toggle();
-                        // css('display')) = "block";
-                        // $(".saleBanner").toggle();
-
-                    }
-                }, 2500)
-
             }
         });
 
@@ -323,19 +312,19 @@ function app() {
         //  Gallery Click
         $('body').on('click', '.gallery', function() {
             // first checks if the user clicked on the drop down button
-            console.log((!!($(".menuButton").hasClass("active"))));
             menuButtonClickTest();
-            // first checks to see if Listings are shown, and if they're in the clearance section
-            if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "block") {
+            // first checks to see if Listings are shown, and if they're in the clearance or category sections
+            if ($(".ListingsDestination") !== "" && ($('.saleBannerLocation').hasClass('saleBannerOn') || self.category !== '')) {
                 self.scrollToTop();
                 self.addSpinner();
+                self.category = '';
                 self.showListings('', '', 100000, '');
             }
 
-            // next checks if Listings are there and not in the clearance section
-            else if ($(".ListingsDestination") !== "" && $(".saleBanner").css('display') == "none") {
+            // next checks if Listings are there and already displaying gallery listings
+            else if ($(".ListingsDestination") !== "" && $('.saleBannerLocation').hasClass('saleBannerOff') && self.category === '') {
                 //this section will eventually be changed when the categories are working
-                console.log("already displaying gallery");
+                console.log(self.category, "already displaying gallery");
                 return;
             }
 
