@@ -9,17 +9,20 @@ function app() {
     // var sidebar = document.querySelector('.sideBar');
     var content = document.querySelector('.contentBlock')
     var pusher = document.querySelector('.verticalPusher');
+    var backToTop = document.querySelector('.backToTop');
+
 
     $(window).on('scroll', function() {
         if (window.scrollY >= pusher.offsetHeight) {
             $(header).addClass('active');
             // $(sidebar).addClass('active');
             $(content).addClass('active');
+            $('.scrollToTop').addClass('active');
         } else {
             $(header).removeClass('active');
             // $(sidebar).removeClass('active');
-            $(content).removeClass('active')
-
+            $(content).removeClass('active');
+            $('.scrollToTop').removeClass('active');
         }
     });
 
@@ -378,6 +381,15 @@ function app() {
             $(menuButton).toggleClass('active');
             $(droppedMenu).toggleClass('active');
         });
+        $(window).resize(function() {
+            if ($('.mainHeader').width() >= 585) {
+                $(menuButton).removeClass('active');
+                $(droppedMenu).removeClass('active');
+            }
+        });
+
+        //  Scroll to Top button click
+        // insert the magic here!
 
         //  Search Queries - NavBar
         $('.navSearch').on('submit', function(e) {
