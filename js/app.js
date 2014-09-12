@@ -507,20 +507,20 @@ function app() {
 
         //  About Us page
 
-        // $('body').on('click', '.aboutLink', function() {
-        //     self.scrollToTop();
-        //     $('.aboutUs').removeClass('aboutUsOff');
-        //     $('body').addClass('noScroll');
+        $('body').on('click', '.aboutLink', function() {
+            self.scrollToTop();
+            $('.aboutUs').removeClass('aboutUsOff');
+            $('body').addClass('noScroll');
 
-        // });
-        // $('.gallery, .clearance, .random, .sButton, #men, #women, #kids, #art, #jewelry, #furniture, #vintage, #weddings').on('click', function() {
-        //     $('.aboutUs').addClass('aboutUsOff');
-        //     $('body').removeClass('noScroll');
-        // });
+        });
+        $('.gallery, .clearance, .random, .sButton, #men, #women, #kids, #art, #jewelry, #furniture, #vintage, #weddings').on('click', function() {
+            $('.aboutUs').addClass('aboutUsOff');
+            $('body').removeClass('noScroll');
+        });
 
-        //1. on click, display about page, scroll to top
-        //2. on click on any other button, turn off about page
-        //3. while about page on, disable scroll
+        // 1. on click, display about page, scroll to top
+        // 2. on click on any other button, turn off about page
+        // 3. while about page on, disable scroll
 
         //Handling sorting box
 
@@ -559,8 +559,8 @@ function app() {
     };
 
     var Affluentsy = new EtsyClient;
-    Affluentsy.showListings('', '', 100000, '');
     Affluentsy.handleClickEvents();
+    Affluentsy.showListings('', '', 100000, '');
     // if ($('.aboutUs').hasClass('alwaysOn')) {
     //     var scrollToHere = $('.verticalPusher').height();
     //     $("html, body").animate({

@@ -169,7 +169,7 @@ body > * {
     transition: 0.2s linear;
 }
 .menuDroppedDown.active {
-    max-height: 235px;
+    max-height: 280px;
     opacity: 1;
     box-shadow: 0px 3px 7px black;
     transition: 0.1s linear;
@@ -194,6 +194,20 @@ body > * {
     text-indent: 0;
     pointer-events: none;
     cursor: pointer;
+}
+#aboutSmallButton {
+    margin-bottom: 1em;
+    border-radius: 10px;
+    border: 1px solid rgb(185, 170, 151);
+    color: rgb(236, 213, 184);
+    background-color: rgb(107, 89, 63);
+    padding: 0 0.5em;
+    list-style-type: none;
+    text-indent: 0;
+    pointer-events: none;
+    cursor: pointer;
+    width: 70%;
+    margin: 0 auto;
 }
 .navBar {
     display: none;
@@ -1012,9 +1026,6 @@ body > * {
 .descriptionBox::-webkit-scrollbar {
     background: transparent;
 }
-.scrollable-content::-webkit-scrollbar-thumb {
-    background: black !important;
-}
 .etsyLink {
     display: inline-block;
     padding: 4% 12%;
@@ -1201,18 +1212,106 @@ a img {
     width: 100%;
     margin: 0 auto;
     padding: 40px 1em 0;
-    background-color: tan;
+    background-color: rgb(180, 156, 123);
+    opacity: 1;
+    pointer-events: auto;
     transform: scale(1);
     transition: 0.3s linear;
-
 }
 .aboutUs.active {
-    padding-top: 120px;
+    padding-top: 160px;
 }
 .aboutUsOff {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
     transform: scale(0);
     transition: 0.3s linear;
+}
+.description {
+    display: block;
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    max-height: 80vh;
+    padding: 1em;
+    border: 3px solid rgba(148, 116, 82, 1);
+    border-radius: 25px;
+}
+.descriptionCover {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.aboutTitle {
+    display: block;
+    background-color: rgb(180, 156, 123);
+    position: absolute;
+    top: -15;
+    left: -14;
+    border: 5px solid rgb(180, 156, 123);
+}
+.aboutTitle img {
+    max-height: 3em;
+}
+.descriptionText {
+    display: block;
+    overflow: hidden;
+    padding-top: 1.5em;
+    overflow-y: scroll;
+    max-height: 60vh;
+}
+.descriptionText::-webkit-scrollbar {
+    background: transparent;
+}
+.announcements {
+    display: block;
+    padding: 1em;
+    font-size: 0.8em;
+    text-align: center;
+}
+.reveal {
+    display: block;
+    width: 100%;
+    transform: scale(0.8);  
+}
+.revealText {
+    display: block;
+    border: 1px solid rgba(1, 1, 1, 1);
+    border-radius: 10px;
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: tan;
+}
+.gitLink {
+    text-decoration: underline;
+}
+.revealCover {
+    display: none;
+}
+.contactInfo {
+    display: block;
+    text-align: center;
+    border: 1px solid rgba(1, 1, 1, 1);
+    border-radius: 10px;
+}
+.name {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+.hoverDisplay {
+    display: block;
+}
+.iconSet {
+    display: block;
+    width: 100%;
+}
+.iconBox {
+    display: inline-block;
+    width: 30%;
+}
+.icon {
+    font-size: 2em;
 }
 @media (min-width: 600px) {
     .aboutUs {
