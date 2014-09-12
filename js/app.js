@@ -508,6 +508,7 @@ function app() {
         //  About Us page
 
         $('body').on('click', '.aboutLink', function() {
+            menuButtonClickTest();
             self.scrollToTop();
             $('.aboutUs').removeClass('aboutUsOff');
             $('body').addClass('noScroll');

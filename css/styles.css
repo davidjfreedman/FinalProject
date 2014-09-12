@@ -204,7 +204,6 @@ body > * {
     padding: 0 0.5em;
     list-style-type: none;
     text-indent: 0;
-    pointer-events: none;
     cursor: pointer;
     width: 70%;
     margin: 0 auto;
