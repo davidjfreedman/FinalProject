@@ -148,7 +148,7 @@ function app() {
             if (results_amount === 0) {
                 $('.results')[0].innerHTML = '<p>No results found for "' + query + '".<br>Please try another search.</p>';
             } else {
-                $('.results')[0].innerText = 'Viewing ' + (self.offset + search_results.length) + ' results out of ' + results_amount;
+                $('.results')[0].textContent = 'Viewing ' + (self.offset + search_results.length) + ' results out of ' + results_amount;
             };
             $('.contentBlock').fadeIn(800);
         })
@@ -487,16 +487,16 @@ function app() {
                 $(".priceSection").toggleClass("ps_on_BG");
             };
             if ($(".priceSection").hasClass('ps_off_BG')) {
-                $(".priceButton")[0].innerText = "Hide Prices";
-                $(".priceButton")[1].innerText = "Hide Prices";
+                $(".priceButton")[0].textContent = "Hide Prices";
+                $(".priceButton")[1].textContent = "Hide Prices";
                 $(".innerPriceDiv").removeClass('priceDisplayOff');
                 $(".innerPriceDiv").addClass('priceDisplayOn');
                 $(".outerPriceDiv").removeClass('priceOuterDisplayOff');
                 $(".outerPriceDiv").addClass('priceOuterDisplayOn');
                 priceButtonToggle();
             } else {
-                $(".priceButton")[0].innerText = "Show Prices";
-                $(".priceButton")[1].innerText = "Show Prices";
+                $(".priceButton")[0].textContent = "Show Prices";
+                $(".priceButton")[1].textContent = "Show Prices";
                 priceButtonToggle();
                 $(".innerPriceDiv").removeClass('priceDisplayOn');
                 $(".innerPriceDiv").addClass('priceDisplayOff');
